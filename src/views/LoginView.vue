@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col sm:flex-row-reverse w-full">
+  <div class="flex flex-col sm:flex-row-reverse w-full p-4">
     <div class="flex justify-center items-center sm:w-1/2">
       <img alt="img" class="w-full h-auto" src="@/assets/img/imago_billder.png" />
     </div>
@@ -35,12 +35,12 @@
       </div>
 
       <div class="flex flex-col">
-        <button
+        <input
           class="bg-yellow-600 hover:bg-blue-900 text-white font-bold my-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button"
-        >
-          Iniciar sesión
-        </button>
+          type="submit"
+          value="Iniciar sesión"
+        />
+
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"

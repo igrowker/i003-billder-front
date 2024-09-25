@@ -8,6 +8,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   type?: 'password' | 'text';
   placeholder?: string;
   labelText: string;
+  fullWidth?: boolean;
   variant?: `${InputStyles}`;
   supportText?: string;
   hasErrors?: boolean;
@@ -23,6 +24,7 @@ export const InputText = ({
   variant = InputStyles.Normal,
   labelText,
   hasErrors = false,
+  fullWidth = true,
   supportText,
 
   ...attributes
@@ -62,7 +64,7 @@ export const InputText = ({
         {
           (type == "text")
             ? (
-              <div>
+              <div className="">
                 <input
                   onFocus={handleFocus}
                   onBlur={(e) => {
@@ -70,16 +72,17 @@ export const InputText = ({
                     if (e.target.value.length === 0) handleBlur();
                   }}
                   className={`
-              ${finalStyle}
-              rounded-[6px]  
-              min-h-[40px] 
-              shadow-md 
-              px-4 
-              transition-all
-              ease-in
-              duration-100
-              outline-none
-              focus:outline-none`
+                    ${finalStyle}
+                    rounded-[6px]  
+                    min-h-[40px] 
+                    ${fullWidth ? 'w-full' : ''}
+                    shadow-md 
+                    px-4 
+                    transition-all
+                    ease-in
+                    duration-100
+                    outline-none
+                    focus:outline-none`
                   }
                   type={type}
                   {...attributes}
@@ -117,7 +120,7 @@ export const InputText = ({
                   {...attributes}
                 />
                 {/* Código hardcodeado, crear componentes de iconos de: Ojo abierto y Ojo cerrado */}
-                <button className="px-2 text-orange-500" onClick={handleTogglePasswordSee}>
+                <button type="button" className="px-2 text-orange-500" onClick={handleTogglePasswordSee}>
                   {
                     (canPasswordSee)
                       ? (

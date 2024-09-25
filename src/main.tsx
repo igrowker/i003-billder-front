@@ -1,10 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import React from 'react';
+import { LoginPage } from './auth/pages/LoginPage';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+
+const root = createRoot(document.getElementById('root')!);
+
+
+root.render(
+    <React.StrictMode>
+        <LoginPage />
+    </React.StrictMode>
 )
+
+

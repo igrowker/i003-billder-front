@@ -46,7 +46,7 @@ export const InputText = ({
     setIsFocused(false)
   };
 
-  const normalStyle = `${isFocused ? 'ring-[3px] ring-orange-400' : ''} `
+  const normalStyle = `${isFocused ? 'border-[3px] border-primary' : ''} `
   const outlinedBlackStyle = 'focus:ring-2 focus:ring-orange/600'
 
 
@@ -56,10 +56,20 @@ export const InputText = ({
 
 
   return (
-    <div className="relative">
+    <div className="relative ">
 
       <label htmlFor={attributes.id ?? ''} className={`relative cursor-text   `}>
-        <span className={`${isFocused ? '-top-1 text-sm px-2 bg-white' : ''} z-10 transition-all ease-in-out duration-100 pointer-events-none absolute text-gray-500 top-1/2  left-2 -translate-y-1/2`}>{labelText}</span>
+        <span
+          style={{
+            top: isFocused ? '0px' : '50%',
+            fontSize: isFocused ? '14px' : 'auto',
+            paddingInline: isFocused ? '8px' : 0,
+            backgroundColor: isFocused ? 'white' : ''
+          }}
+          className={` z-10 transition-all ease-in-out duration-100 pointer-events-none absolute text-gray-500 top-1/2  left-2 -translate-y-1/2`}
+        >
+          {labelText}
+        </span>
 
         {
           (type == "text")
@@ -73,8 +83,8 @@ export const InputText = ({
                   }}
                   className={`
                     ${finalStyle}
-                    rounded-[6px]  
-                    min-h-[40px] 
+                    rounded-[4px]  
+                    min-h-[50px] 
                     ${fullWidth ? 'w-full' : ''}
                     shadow-md 
                     px-4 
@@ -92,9 +102,9 @@ export const InputText = ({
             : (
               <div className={`${finalStyle}
               rounded-[6px]  
-              min-h-[40px] 
-              max-h-[40px]
-              h-[40px]
+              min-h-[50px] 
+              max-h-[50px]
+              h-[50px]
               shadow-md 
               
               transition-all
@@ -120,7 +130,7 @@ export const InputText = ({
                   {...attributes}
                 />
                 {/* Código hardcodeado, crear componentes de iconos de: Ojo abierto y Ojo cerrado */}
-                <button type="button" className="px-2 text-orange-500" onClick={handleTogglePasswordSee}>
+                <button type="button" className="bg-white px-2 text-primary" onClick={handleTogglePasswordSee}>
                   {
                     (canPasswordSee)
                       ? (

@@ -7,9 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#FFA100',
-        'secondary': '#F7FAFC',
-        'tertiary': '#FFED00'
+        customOrange: "#FFA100",
+        customBlue: "#08121E",
+        customYellow: "#FFED00",
+        customWhite: "#F7FAFC",
       },
       backgroundImage: {
         'gradient-yellow': 'linear-gradient(90deg, rgba(255,237,0,1) 0%, rgba(255,161,0,1) 100%)'

@@ -12,3 +12,4 @@ createRoot(document.getElementById("root")!).render(
     <StrictMode>{user ? <App /> : <LoginPage />}</StrictMode>
   </BrowserRouter>
 );
+

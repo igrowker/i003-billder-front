@@ -30,7 +30,7 @@ export const PersonalDataTab = () => {
         />
       </div>
 
-      <div className='text-black bg-primary mt-8 rounded-lg px-8 pt-2 pb-5'>
+      <div className='text-black bg-customOrange mt-8 rounded-lg px-8 pt-2 pb-5'>
         <h3 className='text-md font-medium flex items-center justify-center  gap-3 mb-2'>
           {/* hardcodeado crear componente icono de firma */}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-feather" viewBox="0 0 16 16">

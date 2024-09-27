@@ -46,7 +46,7 @@ export const InputText = ({
     setIsFocused(false)
   };
 
-  const normalStyle = `${isFocused ? 'border-[3px] border-primary' : ''} `
+  const normalStyle = `${isFocused ? 'border-[3px] border-customOrange' : ''} `
   const outlinedBlackStyle = 'focus:ring-2 focus:ring-orange/600'
 
 
@@ -130,7 +130,7 @@ export const InputText = ({
                   {...attributes}
                 />
                 {/* Código hardcodeado, crear componentes de iconos de: Ojo abierto y Ojo cerrado */}
-                <button type="button" className="bg-white px-2 text-primary" onClick={handleTogglePasswordSee}>
+                <button type="button" className="bg-white px-2 text-customOrange" onClick={handleTogglePasswordSee}>
                   {
                     (canPasswordSee)
                       ? (

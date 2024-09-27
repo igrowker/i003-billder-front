@@ -10,7 +10,7 @@ interface PersonalDataTabProps {
 
 export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
   return (
-    <div className='h-full flex flex-col gap-4'>
+    <div className='h-full flex  flex-col gap-4'>
       <div className='flex-grow'>
         <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">Completá con tus datos personales</h3>
         <ProfileCircle  middleIcon={<CameraIcon />} />
@@ -57,7 +57,7 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
         </div>
       </div>
 
-      <ReusableButton onClick={handleContinue} >Continuar</ReusableButton>
+      <ReusableButton  onClick={handleContinue} >Continuar</ReusableButton>
     </div>
   )
 }

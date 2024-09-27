@@ -18,10 +18,11 @@ export const ReturnLayout = ({ children, title, returnFunction, isPending }: Ret
                 </button>
                 <h3 className=" flex-grow text-center font-medium text-lg">{title}</h3>
             </div>
-            <div className={`h-[calc(100dvh-52px)] px-4 pb-4 ${isPending ? 'agregar clases animacion' : ''} `}>
+            <div className={`h-tall:h-[calc(100dvh-52px)]  px-4 pb-4 ${isPending ? 'agregar clases animacion' : ''} `}>
                 {children}
             </div>
         
         </div>
     )
 }
+// 

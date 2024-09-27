@@ -1,4 +1,5 @@
-import { PersonalDataTab } from "../components/PersonalDataTab"
+// import { PersonalDataTab } from "../components/PersonalDataTab"
+import { RegisterSignatureTab } from "../components/RegisterSignatureTab"
 
 export const RegisterPage = () => {
   return (
@@ -6,8 +7,7 @@ export const RegisterPage = () => {
       {/* < registrate */}
       
       <div >
-        <h3 className="font-medium  pt-2 pb-1 text-lg">Completá con tus datos personales</h3>
-        <PersonalDataTab></PersonalDataTab>
+        <RegisterSignatureTab></RegisterSignatureTab>
       </div>
     </div>
   )

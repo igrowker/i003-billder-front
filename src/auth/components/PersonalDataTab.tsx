@@ -2,7 +2,8 @@ import { InputText } from '../../ui/components/inputs/InputText';
 
 export const PersonalDataTab = () => {
   return (
-    <div>
+    <div className=''>
+      <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">Completá con tus datos personales</h3>
       <div className='bg-gradient-yellow my-4 mx-auto w-16 h-16 rounded-full'>
         {/* Subir imagen */}
 

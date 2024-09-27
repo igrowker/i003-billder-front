@@ -12,6 +12,9 @@ export default {
         customYellow: "#FFED00",
         customWhite: "#F7FAFC",
       },
+      screens: {
+        'h-tall': { 'raw': '(min-height: 700px)' }
+      },
       backgroundImage: {
         'gradient-yellow': 'linear-gradient(90deg, rgba(255,237,0,1) 0%, rgba(255,161,0,1) 100%)'
       }

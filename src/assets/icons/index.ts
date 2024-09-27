@@ -1,0 +1,6 @@
+export * from './DownloadIcon'
+export * from './ShareIcon'
+export * from './DocIcon'
+export * from './NewProjectIcon'
+export * from './CameraIcon'
+export * from './UndoIcon'

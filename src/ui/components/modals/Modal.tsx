@@ -8,6 +8,7 @@ interface ModalProps {
 const Modal = ({ isOpen, title, content, footer }: ModalProps) => {
   if (!isOpen) return null;
 
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-70">
       <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-xs">

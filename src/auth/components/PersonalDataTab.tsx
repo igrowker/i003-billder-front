@@ -27,7 +27,7 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
             id='adress'
             labelText='Dirección'
           />
-          <div className='grid grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <InputText
               id='country'
               labelText='País'
@@ -37,6 +37,10 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
               labelText='Ciudad'
             />
           </div>
+          <InputText
+            id='province'
+            labelText='Provincia'
+          />
           <InputText
             id='phone'
             labelText='Teléfono'

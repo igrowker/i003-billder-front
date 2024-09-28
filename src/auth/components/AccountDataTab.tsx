@@ -7,7 +7,7 @@ export const AccountDataTab = () => {
 
     
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full flex-grow">
             <div className="flex-grow">
 
                 <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">Completá los datos de la cuenta</h3>

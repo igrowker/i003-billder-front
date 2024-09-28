@@ -8,7 +8,7 @@ interface RegisterSignatureTabProps {
 
 export const RegisterSignatureTab = ({ handleContinue }: RegisterSignatureTabProps) => {
     return (
-        <div className="flex flex-col h-full gap-4">
+        <div className="flex flex-col flex-grow h-full gap-4">
             <div className="flex-grow ">
                 <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">Registra tu firma</h3>
                 <h3 className="font-medium  pt-2 pb-1 text-lg ">Realizá tu firma en papel y tómale una foto.</h3>

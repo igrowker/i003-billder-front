@@ -1,13 +1,16 @@
-import { useState, useTransition } from "react"
-import { RegisterSignatureTab, AccountDataTab, PersonalDataTab } from "../components/"
-import { ReturnLayout } from "../../layouts/ReturnLayout";
+import { useState, useTransition } from "react";
+import {
+  RegisterSignatureTab,
+  AccountDataTab,
+  PersonalDataTab,
+} from "@/auth/components/";
+import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useNavigate } from "react-router-dom";
-
 
 enum RegisterTabs {
   Initial = 1,
   SignatureTab = 2,
-  EndTab = 3
+  EndTab = 3,
 }
 
 export const RegisterPage = () => {
@@ -19,34 +22,31 @@ export const RegisterPage = () => {
     const nextTab = tab == RegisterTabs.EndTab ? null : tab + 1;
     if (nextTab === null) return;
     startTransition(() => {
-      setTab(nextTab)
+      setTab(nextTab);
     });
-
-
-  }
+  };
   const handleReturnTab = () => {
-    const tabToChange = tab == RegisterTabs.Initial ? tab : tab - 1
-    if (tabToChange == tab) return navigate('register');
+    const tabToChange = tab == RegisterTabs.Initial ? tab : tab - 1;
+    if (tabToChange == tab) return navigate("register");
     startTransition(() => {
-
-      setTab(tabToChange)
-    })
+      setTab(tabToChange);
+    });
   };
 
-
   return (
-    <ReturnLayout isPending={isPending} returnFunction={handleReturnTab} title="Registrate">
+    <ReturnLayout
+      isPending={isPending}
+      returnFunction={handleReturnTab}
+      title="Registrate"
+    >
       {/* tabs */}
-      {
-        (tab === RegisterTabs.Initial) && <PersonalDataTab handleContinue={handleNextTab} />
-      }
-      {
-        (tab === RegisterTabs.SignatureTab) && <RegisterSignatureTab handleContinue={handleNextTab} />
-      }
-      {
-        (tab === RegisterTabs.EndTab) && <AccountDataTab  />
-      }
-
+      {tab === RegisterTabs.Initial && (
+        <PersonalDataTab handleContinue={handleNextTab} />
+      )}
+      {tab === RegisterTabs.SignatureTab && (
+        <RegisterSignatureTab handleContinue={handleNextTab} />
+      )}
+      {tab === RegisterTabs.EndTab && <AccountDataTab />}
     </ReturnLayout>
-  )
-}
+  );
+};

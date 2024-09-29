@@ -22,7 +22,7 @@ const BottomNavBar = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 w-full bg-customOrange p-4">
+    <nav className="fixed h-14 z-[100] bottom-0 left-0 right-0 w-full bg-customOrange p-4">
       <div className="flex justify-around items-center">
         <Link to="/home" className={getLinkStyles("/home")}>
           <HomeIcon />

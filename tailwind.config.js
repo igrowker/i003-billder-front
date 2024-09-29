@@ -16,7 +16,8 @@ export default {
         'h-tall': { 'raw': '(min-height: 700px)' }
       },
       backgroundImage: {
-        'gradient-yellow': 'linear-gradient(90deg, rgba(255,237,0,1) 0%, rgba(255,161,0,1) 100%)'
+        'gradient-yellow': 'linear-gradient(90deg, rgba(255,237,0,1) 0%, rgba(255,161,0,1) 100%)',
+        'gradient-yellow-inverted': 'linear-gradient(180deg, rgba(255,237,0,1) 0%, rgba(255,161,0,1) 100%)'
       }
     },
     

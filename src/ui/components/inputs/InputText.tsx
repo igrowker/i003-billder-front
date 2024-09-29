@@ -1,9 +1,9 @@
-import { HTMLAttributes, useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { InputStyles } from "../../../interfaces";
 
 
 
-interface InputProps extends HTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   type?: 'password' | 'text';
   placeholder?: string;
@@ -62,7 +62,7 @@ export const InputText = ({
         <span
           style={{
             top: isFocused ? '0px' : '50%',
-            fontSize: isFocused ? '14px' : 'auto',
+            fontSize: isFocused ? '14px' : '16px',
             paddingInline: isFocused ? '8px' : 0,
             backgroundColor: isFocused ? 'white' : ''
           }}
@@ -76,6 +76,7 @@ export const InputText = ({
             ? (
               <div className="">
                 <input
+                  autoComplete="off"
                   onFocus={handleFocus}
                   onBlur={(e) => {
 
@@ -115,6 +116,7 @@ export const InputText = ({
               relative
                flex`}>
                 <input
+                  autoComplete="off"
                   onFocus={handleFocus}
                   onBlur={(e) => {
 

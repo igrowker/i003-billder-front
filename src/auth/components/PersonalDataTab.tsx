@@ -1,7 +1,5 @@
 import { CameraIcon } from '../../assets/icons';
-import ReusableButton from '../../ui/components/buttons/ReusableButton';
-import { InputText } from '../../ui/components/inputs/InputText';
-import { ProfileCircle } from '../../ui/components/profile/ProfileCircle';
+import { ProfileCircle, InputText, ReusableButton } from '../../ui/components/';
 
 
 interface PersonalDataTabProps {
@@ -10,7 +8,7 @@ interface PersonalDataTabProps {
 
 export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
   return (
-    <div className='h-full flex  flex-col gap-4'>
+    <div className='h-full flex-grow flex  flex-col gap-4'>
       <div className='flex-grow'>
         <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">Completá con tus datos personales</h3>
         <ProfileCircle  middleIcon={<CameraIcon />} />
@@ -27,7 +25,7 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
             id='adress'
             labelText='Dirección'
           />
-          <div className='grid grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <InputText
               id='country'
               labelText='País'
@@ -38,11 +36,15 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
             />
           </div>
           <InputText
+            id='province'
+            labelText='Provincia'
+          />
+          <InputText
             id='phone'
             labelText='Teléfono'
           />
         </div>
-        <div className='text-black bg-customOrange mt-8 rounded-lg px-8 pt-2 pb-5' onClick={handleContinue}>
+        <div className='text-black bg-customOrange mt-8 rounded-lg px-8 pt-2 pb-5 cursor-pointer ' onClick={handleContinue}>
           <h3 className='text-md font-medium flex items-center justify-center  gap-3 mb-2'>
             {/* hardcodeado crear componente icono de firma */}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-feather" viewBox="0 0 16 16">
@@ -50,7 +52,7 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
             </svg>
             Registrar firma
           </h3>
-          <p className='font-light text-left'>
+          <p className='font-light text-left mx-auto flex justify-center'>
             Guardá tu firma para firmar tus docmuentos de manera más rápida.
           </p>
 

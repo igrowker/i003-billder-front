@@ -1,5 +1,4 @@
-import ReusableButton from "../../ui/components/buttons/ReusableButton"
-import { InputText } from "../../ui/components/inputs/InputText"
+import { InputText, ReusableButton } from "../../ui/components/"
 
 
 
@@ -7,7 +6,7 @@ export const AccountDataTab = () => {
 
     
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full flex-grow">
             <div className="flex-grow">
 
                 <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">Completá los datos de la cuenta</h3>

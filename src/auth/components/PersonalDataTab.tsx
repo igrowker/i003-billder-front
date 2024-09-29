@@ -1,7 +1,5 @@
 import { CameraIcon } from '../../assets/icons';
-import ReusableButton from '../../ui/components/buttons/ReusableButton';
-import { InputText } from '../../ui/components/inputs/InputText';
-import { ProfileCircle } from '../../ui/components/profile/ProfileCircle';
+import { ProfileCircle, InputText, ReusableButton } from '../../ui/components/';
 
 
 interface PersonalDataTabProps {

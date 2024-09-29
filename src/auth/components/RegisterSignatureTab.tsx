@@ -1,5 +1,5 @@
 import { CameraIcon, UndoIcon } from "../../assets/icons"
-import ReusableButton from "../../ui/components/buttons/ReusableButton"
+import { ReusableButton } from "../../ui/components/"
 
 
 interface RegisterSignatureTabProps {

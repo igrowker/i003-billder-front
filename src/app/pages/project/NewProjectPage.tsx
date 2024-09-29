@@ -1,14 +1,15 @@
-import { ReturnLayout } from "../../layouts/ReturnLayout"
-import ReusableButton from "../../ui/components/buttons/ReusableButton"
-import { InputText } from "../../ui/components/inputs/InputText"
-import { ProjectCircle } from "../components/ProjectCircle"
+import { useNavigate } from "react-router-dom"
+import { ReturnLayout } from "../../../layouts/ReturnLayout"
+import { InputText, ReusableButton  } from "../../../ui/components/"
+import { ProjectCircle } from "../../components/"
 
 export const NewProjectPage = () => {
+    const navigate = useNavigate();
     return (
         <ReturnLayout
             isPending={false}
             title="Nuevo proyecto"
-            returnFunction={() => { }}
+            returnFunction={() => navigate('/')}
         >
             <div className="mt-4 grid place-content-center">
                 <ProjectCircle/>

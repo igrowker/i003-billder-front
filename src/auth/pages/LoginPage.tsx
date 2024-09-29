@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import OutlineButton from "../../ui/components/buttons/OutlineButton"
-import ReusableButton from "../../ui/components/buttons/ReusableButton"
-import { InputText } from "../../ui/components/inputs/InputText"
+import { InputText, ReusableButton, OutlineButton} from "../../ui/components/"
 
 export const LoginPage = () => {
 

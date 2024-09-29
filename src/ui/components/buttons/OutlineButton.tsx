@@ -4,7 +4,7 @@ interface OutLineButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-const OutlineButton = ({ children, className='', ...attributes }: OutLineButtonProps) => {
+export const OutlineButton = ({ children, className='', ...attributes }: OutLineButtonProps) => {
   return (
     <button
       {...attributes}
@@ -18,4 +18,3 @@ const OutlineButton = ({ children, className='', ...attributes }: OutLineButtonP
   );
 };
 
-export default OutlineButton;

@@ -1,5 +1,4 @@
-import ReusableButton from "../../ui/components/buttons/ReusableButton"
-import { InputText } from "../../ui/components/inputs/InputText"
+import { InputText, ReusableButton } from "../../ui/components/"
 
 
 

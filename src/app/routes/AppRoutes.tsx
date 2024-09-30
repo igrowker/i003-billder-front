@@ -1,8 +1,6 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import BottomNavBar from "@/ui/components/navbar/BottomNavBar";
-import { NewProjectPage } from "@/app/pages/project/NewProjectPage";
-import { ProjectInfoPage } from "@/app/pages/project/ProjectInfoPage";
-import HomePage from "@/auth/pages/HomePage";
+import { NewProjectPage, HomePage, ProjectInfoPage } from "@/app/pages/";
+import { BottomNavBar } from "@/ui/components";
 
 export const AppRoutes = () => {
   const excludeNavbarRoutes: string[] = [];

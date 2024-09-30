@@ -1,15 +1,9 @@
 import { useState } from "react";
-import { DocIcon, NewProjectIcon } from "@/assets/icons";
-import { UserCircleIcon, SearchIcon } from "@/assets/icons/IconHome";
-import ActionCard from "@/ui/components/buttons/ActionCard";
-import IngresosPendientes from "@/ui/components/IngresosPendientes";
-import BottomNavBar from "@/ui/components/navbar/BottomNavBar";
-import ProyectCard from "@/ui/components/ProyectCard";
-import Modal from "@/ui/components/modals/Modal";
-import { BellIcon } from "@/assets/icons/BellIcon";
+import { DocIcon, NewProjectIcon, UserCircleIcon, BellIcon } from "@/assets/icons";
+import { ActionCard, IngresosPendientes, Modal, ProyectCard, SearchInput } from "@/ui/components/";
 // import { useNavigate } from "react-router-dom"; // Para redireccionar en el futuro
 
-function HomePage() {
+export function HomePage() {
   const [showModal, setShowModal] = useState(false);
   // const navigate = useNavigate(); // Hook para redirigir
   const projects = [
@@ -49,16 +43,7 @@ function HomePage() {
 
       <IngresosPendientes />
 
-      <div className="relative mb-4 shadow-lg">
-        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-          <SearchIcon />
-        </span>
-        <input
-          type="text"
-          placeholder="Buscar"
-          className="w-full pl-10 p-2 border border-gray-300 rounded-lg"
-        />
-      </div>
+      <SearchInput />
 
       <div className="flex justify-between ">
         <ActionCard
@@ -99,7 +84,6 @@ function HomePage() {
         )}
       </div>
 
-      <BottomNavBar />
       <Modal
         isOpen={showModal}
         title="Es necesario crear un proyecto primero"
@@ -129,4 +113,3 @@ function HomePage() {
   );
 }
 
-export default HomePage;

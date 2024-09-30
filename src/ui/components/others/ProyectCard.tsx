@@ -1,4 +1,4 @@
-import { BriefcaseIcon } from "@/assets/icons/IconHome";
+import { BriefcaseIcon } from "@/assets/icons";
 
 interface ProyectCardProps {
   title?: string;
@@ -8,7 +8,7 @@ interface ProyectCardProps {
   onClick?: () => void;
 }
 
-const ProyectCard = ({
+export const ProyectCard = ({
   title,
   owner,
   status,
@@ -42,4 +42,3 @@ const ProyectCard = ({
   );
 };
 
-export default ProyectCard;

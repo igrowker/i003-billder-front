@@ -1,6 +1,6 @@
-import { ArrowUpIcon, ArrowDownIcon } from "@/assets/icons/IconHome"; // Ajusta la ruta según la estructura de tu proyecto
+import { ArrowUpIcon, ArrowDownIcon } from "@/assets/icons/"; // Ajusta la ruta según la estructura de tu proyecto
 
-const IngresosPendientes = () => {
+export const IngresosPendientes = () => {
   const ingresos = 500000;
   const pendiente = 700000;
 
@@ -32,5 +32,3 @@ const IngresosPendientes = () => {
     </div>
   );
 };
-
-export default IngresosPendientes;

@@ -5,7 +5,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal = ({ isOpen, title, footer, children }: ModalProps) => {
+export const Modal = ({ isOpen, title, footer, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -19,4 +19,3 @@ const Modal = ({ isOpen, title, footer, children }: ModalProps) => {
   );
 };
 
-export default Modal;

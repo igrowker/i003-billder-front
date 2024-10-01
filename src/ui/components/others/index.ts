@@ -1,2 +1,2 @@
-export * from './IngresosPendientes'
-export * from './ProyectCard'
+export * from "./IngresosPendientes";
+export * from "./ProyectCard";

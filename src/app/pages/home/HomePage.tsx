@@ -1,27 +1,33 @@
 import { useState } from "react";
-import { DocIcon, NewProjectIcon, UserCircleIcon, BellIcon } from "@/assets/icons";
-import { ActionCard, IngresosPendientes, Modal, ProyectCard, SearchInput } from "@/ui/components/";
-// import { useNavigate } from "react-router-dom"; // Para redireccionar en el futuro
+import {
+  DocIcon,
+  NewProjectIcon,
+  UserCircleIcon,
+  BellIcon,
+} from "@/assets/icons";
+import {
+  ActionCard,
+  IngresosPendientes,
+  Modal,
+  ProyectCard,
+  ReusableButton,
+  SearchInput,
+} from "@/ui/components/";
+import { useNavigate } from "react-router-dom";
+import { projects, user } from "@/mock";
+import { Project } from "@/app/types";
 
 export function HomePage() {
   const [showModal, setShowModal] = useState(false);
-  // const navigate = useNavigate(); // Hook para redirigir
-  const projects = [
-    {
-      title: "Casa San Isidro",
-      owner: "María Martínez",
-      status: "Presupuesto confirmado",
-    },
-    {
-      title: "Terraza Avellaneda",
-      owner: "Pablo Gomez",
-      status: "Presupuesto confirmado",
-    },
-  ];
+  const [showDocumentModal, setShowDocumentModal] = useState(false);
+  const [createDocument, setCreateDocument] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project>();
+  const navigate = useNavigate();
 
   const crearNuevoProject = () => {
-    alert("Nuevo proyecto clickeado");
+    navigate("/new-project");
   };
+
   return (
     <div className="container mx-auto p-4 flex flex-col h-screen ">
       <header className="bg-white h-20 flex justify-between items-center">
@@ -31,7 +37,7 @@ export function HomePage() {
           </div>
           <div className="flex flex-col">
             <h2 className="text-xl font-semibold">Hola</h2>
-            <span className="text-xl font-semibold">Carlos!</span>
+            <span className="text-xl font-semibold">{user?.name}!</span>
           </div>
         </div>
         <div>
@@ -57,12 +63,18 @@ export function HomePage() {
           onClick={() => {
             if (projects.length === 0) {
               setShowModal(true);
+            } else {
+              setCreateDocument(!createDocument);
             }
           }}
         />
       </div>
-
-      <div className="w-full py-2">
+      {createDocument && (
+        <div className="text-customOrange py-4">
+          Selecciona el proyecto para el cual vas a crear el documento
+        </div>
+      )}
+      <div className="flex-1 overflow-auto py-2">
         <h1>Mis proyectos</h1>
         {projects.length > 0 ? (
           projects.map((project, index) => (
@@ -72,9 +84,12 @@ export function HomePage() {
               owner={project.owner}
               status={project.status}
               onClick={() => {
-                alert(`Clic en proyecto: ${project.title}`);
-                // En el futuro, podrías usar navigate para redirigir a la página de proyecto
-                // navigate(`/project/${project.id}`);
+                if (createDocument) {
+                  setShowDocumentModal(true);
+                  setSelectedProject(project);
+                } else {
+                  navigate(`/project/${project.id}`);
+                }
               }}
             />
           ))
@@ -83,6 +98,27 @@ export function HomePage() {
           <ProyectCard message="Aún no creaste proyectos" />
         )}
       </div>
+
+      <Modal isOpen={showDocumentModal} title={selectedProject?.title}>
+        <div className="space-y-4">
+          <p>Elige el tipo de documento</p>
+          <ReusableButton
+            onClick={() => {
+              setShowDocumentModal(false);
+            }}
+          >
+            Presupuesto
+          </ReusableButton>
+          <ReusableButton
+            onClick={() => {
+              setShowDocumentModal(false);
+              navigate("/crear-acuerdo-obra", { state: selectedProject });
+            }}
+          >
+            Acuerdo de obra
+          </ReusableButton>
+        </div>
+      </Modal>
 
       <Modal
         isOpen={showModal}
@@ -112,4 +148,3 @@ export function HomePage() {
     </div>
   );
 }
-

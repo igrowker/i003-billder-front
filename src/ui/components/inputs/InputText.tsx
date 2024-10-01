@@ -25,7 +25,7 @@ export const InputText = ({
   const [canPasswordSee, setCanPasswordSee] = useState(false);
 
   const handleTogglePasswordSee = () => {
-    setCanPasswordSee((prev) => !prev);
+    setCanPasswordSee(prev => !prev);
   };
 
   const handleFocus = () => {
@@ -65,7 +65,7 @@ export const InputText = ({
             <input
               autoComplete="off"
               onFocus={handleFocus}
-              onBlur={(e) => {
+              onBlur={e => {
                 if (e.target.value.length === 0) handleBlur();
               }}
               className={`
@@ -104,7 +104,7 @@ export const InputText = ({
             <input
               autoComplete="off"
               onFocus={handleFocus}
-              onBlur={(e) => {
+              onBlur={e => {
                 if (e.target.value.length === 0) handleBlur();
               }}
               className={`

@@ -1,6 +1,4 @@
-
-
 export enum InputStyles {
-    Normal = 'normal',
-    OutlinedBlack = 'outlined-black'
+  Normal = "normal",
+  OutlinedBlack = "outlined-black",
 }

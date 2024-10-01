@@ -18,4 +18,3 @@ export const Modal = ({ isOpen, title, footer, children }: ModalProps) => {
     </div>
   );
 };
-

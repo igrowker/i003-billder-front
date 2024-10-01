@@ -17,4 +17,3 @@ export const ActionCard = ({ icon, label, onClick }: ActionCardProps) => {
     </div>
   );
 };
-

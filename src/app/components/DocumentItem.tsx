@@ -16,8 +16,8 @@ export const DocumentItem = ({ status, title }: DocumentItemProps) => {
     status == DocumentStatus.Accepted
       ? "Aprobado"
       : status == DocumentStatus.InProgress
-      ? "En espera de aprobación"
-      : status == DocumentStatus.Declined && "Rechazado";
+        ? "En espera de aprobación"
+        : status == DocumentStatus.Declined && "Rechazado";
 
   return (
     <div className="p-4 bg-white rounded-xl shadow-md">

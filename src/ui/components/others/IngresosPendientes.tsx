@@ -6,7 +6,7 @@ export const IngresosPendientes = () => {
 
   return (
     <div className="flex justify-around py-4">
-      <div className="flex items-center space-x-2 bg-white shadow-md p-4 rounded-lg">
+      <div className="flex items-center space-x-2 bg-white  p-4 rounded-lg">
         <div className="bg-black p-2 rounded-md">
           <ArrowUpIcon className="text-white w-6 h-6" />
         </div>
@@ -18,7 +18,7 @@ export const IngresosPendientes = () => {
         </div>
       </div>
 
-      <div className="flex items-center space-x-2 bg-white shadow-md p-4 rounded-lg">
+      <div className="flex items-center space-x-2 bg-white  p-4 rounded-lg">
         <div className="bg-black p-2 rounded-md">
           <ArrowDownIcon className="text-white w-6 h-6" />
         </div>

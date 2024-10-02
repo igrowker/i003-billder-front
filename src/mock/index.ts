@@ -55,7 +55,6 @@ export const projects = [
     pais: "Argentina",
   },
 ];
-
 export const user = {
   name: "Carlos Jiménez",
   email: "carlo.gomez@example.com",

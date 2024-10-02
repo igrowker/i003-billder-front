@@ -1,7 +1,7 @@
 import { BudgetCalcTab, BudgetConfirmDataTab, BudgetViewDocumentTab } from "@/app/components"
 import { ReturnLayout } from "@/layouts/ReturnLayout"
 import { ReusableButton } from "@/ui/components"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { useNavigate } from "react-router-dom"
 
 
@@ -34,20 +34,29 @@ export const CreateBudgetPage = () => {
 
   const navigate = useNavigate();
   const [tab, setTab] = useState(phases.find((phase) => phase.phase == CreateBudgetTabs.Initial)!);
-
+  const [isPending, startTransition] = useTransition()
 
   const handleChangeTab = () => {
     if (tab.phase == CreateBudgetTabs.End) return;
-    setTab(phases[tab.phase])
+    startTransition(() => {
+      setTab(phases[tab.phase])
+
+    })
   }
   const handleGoBack = () => {
 
     if (tab.phase === CreateBudgetTabs.Initial) {
-      setTab(phases.find((phase) => phase.phase == CreateBudgetTabs.Initial)!);
-      navigate('/')
+      startTransition(() => {
+        setTab(phases.find((phase) => phase.phase == CreateBudgetTabs.Initial)!);
+        navigate('/')
+
+      })
       return;
     };
-    setTab(phases.find(phase => phase.phase === tab.phase - 1)!)
+    startTransition(() => {
+      setTab(phases.find(phase => phase.phase === tab.phase - 1)!)
+
+    })
   }
 
   return (
@@ -62,6 +71,9 @@ export const CreateBudgetPage = () => {
       </div>
       <ReusableButton onClick={handleChangeTab} className="mt-8">
         Continuar
+        {
+          isPending && 'cargando...'
+        }
       </ReusableButton>
     </ReturnLayout>
   )

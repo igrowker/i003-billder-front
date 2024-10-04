@@ -66,14 +66,12 @@ export const CreateBudgetPage = () => {
 
     >
       <div className="">
-        <h4 className="font-medium text-customOrange text-xl mt-4 mb-4">Paso {tab.phase}: {tab.title}</h4>
+        <h4 className="font-medium text-customOrange text-xl mt-4 mb-2">Paso {tab.phase}: {tab.title}</h4>
         {tab.component}
       </div>
       <ReusableButton onClick={handleChangeTab} className="mt-8">
         Continuar
-        {
-          isPending && 'cargando...'
-        }
+       
       </ReusableButton>
     </ReturnLayout>
   )

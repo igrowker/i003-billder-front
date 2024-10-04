@@ -16,6 +16,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { projects, user } from "@/mock";
 import { Project } from "@/app/types";
+import { NotDataCreated } from "@/app/components";
 
 export function HomePage() {
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +30,7 @@ export function HomePage() {
   };
 
   return (
-    <div className="container mx-auto p-4 flex flex-col h-screen ">
+    <div className="  p-4 flex flex-col  ">
       <header className="bg-white h-20 flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <div className="bg-customOrange rounded-full w-10 h-10 flex justify-center items-center text-white text-xl">
@@ -51,7 +52,7 @@ export function HomePage() {
 
       <SearchInput />
 
-      <div className="flex justify-between ">
+      <div className="flex justify-between mb-8">
         <ActionCard
           icon={<NewProjectIcon />}
           label="Nuevo Proyecto"
@@ -74,29 +75,31 @@ export function HomePage() {
           Selecciona el proyecto para el cual vas a crear el documento
         </div>
       )}
-      <div className="flex-1 overflow-auto py-2">
-        <h1>Mis proyectos</h1>
-        {projects.length > 0 ? (
-          projects.map((project, index) => (
-            <ProyectCard
-              key={index}
-              title={project.title}
-              owner={project.owner}
-              status={project.status}
-              onClick={() => {
-                if (createDocument) {
-                  setShowDocumentModal(true);
-                  setSelectedProject(project);
-                } else {
-                  navigate(`/project/${project.id}`);
-                }
-              }}
-            />
-          ))
-        ) : (
-          // Si no hay proyectos, muestra un mensaje
-          <ProyectCard message="Aún no creaste proyectos" />
-        )}
+      <div className="">
+        <h2 className="font-medium text-2xl mb-2">Mis proyectos</h2>
+        {
+          (projects.length > 0)
+            ? (
+              projects.map((project, index) => (
+                <ProyectCard
+                  key={index}
+                  title={project.title}
+                  owner={project.owner}
+                  status={project.status}
+                  onClick={() => {
+                    if (createDocument) {
+                      setShowDocumentModal(true);
+                      setSelectedProject(project);
+                    } else {
+                      navigate(`/project/${project.id}`);
+                    }
+                  }}
+                />
+              ))
+            ) : (
+              // Si no hay proyectos, muestra un mensaje
+              <NotDataCreated text="Aún no creaste proyectos" />
+            )}
       </div>
 
       <Modal isOpen={showDocumentModal} title={selectedProject?.title}>
@@ -121,6 +124,7 @@ export function HomePage() {
       </Modal>
 
       <Modal
+        children={<></>}
         isOpen={showModal}
         title="Es necesario crear un proyecto primero"
         footer={
@@ -142,9 +146,7 @@ export function HomePage() {
             </button>
           </div>
         }
-      >
-        <></>
-      </Modal>
+      />
     </div>
   );
 }

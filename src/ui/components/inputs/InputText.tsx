@@ -2,7 +2,7 @@ import { InputHTMLAttributes, useState } from "react";
 import { InputStyles } from "@/interfaces";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  type?: "password" | "text";
+  type?: "password" | "text" | "number";
   placeholder?: string;
   labelText: string;
   fullWidth?: boolean;
@@ -60,7 +60,7 @@ export const InputText = ({
           {labelText}
         </span>
 
-        {type == "text" ? (
+        {type == "text"  || type == "number" ? (
           <div className="">
             <input
               autoComplete="off"
@@ -71,6 +71,7 @@ export const InputText = ({
               className={`
                     ${finalStyle}
                     rounded-[4px]  
+                    ${isFocused ? '' : 'placeholder:text-transparent' }
                     min-h-[50px] 
                     ${fullWidth ? "w-full" : ""}
                     shadow-md 
@@ -162,9 +163,8 @@ export const InputText = ({
         )}
       </label>
       <span
-        className={`${
-          hasErrors ? "text-red-500" : ""
-        } absolute top-[110%]  w-[calc(100%-4px)] text-xs select-none text-gray-600 left-1`}
+        className={`${hasErrors ? "text-red-500" : ""
+          } absolute top-[110%]  w-[calc(100%-4px)] text-xs select-none text-gray-600 left-1`}
       >
         {supportText}
       </span>

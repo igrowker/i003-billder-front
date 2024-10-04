@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { ReusableButton } from "@/ui/components";
-import ClientInfoCard from "@/ui/components/ClientInfoCard";
+import { ReusableButton, ClientInfoCard, UserInfoCard } from "@/ui/components";
 import { Project } from "@/app/types";
-import UserInfoCard from "@/ui/components/UserInfoCard";
 import { user } from "@/mock";
 
 interface ProjectAgreementTab1Props {
@@ -10,7 +8,7 @@ interface ProjectAgreementTab1Props {
   projectData: Project;
 }
 
-const ProjectAgreementTab1 = ({
+export const ProjectAgreementTab1 = ({
   handleContinue,
   projectData,
 }: ProjectAgreementTab1Props) => {
@@ -46,5 +44,3 @@ const ProjectAgreementTab1 = ({
     </div>
   );
 };
-
-export default ProjectAgreementTab1;

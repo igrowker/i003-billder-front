@@ -4,6 +4,7 @@ import { WhatsappIcon } from "@/assets/icons/";
 import { AddIcon } from "@/assets/icons/AddIcon";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { FlotatingButton } from "@/ui/components/";
+import { useNavigate } from "react-router-dom";
 
 export const ProjectInfoPage = () => {
   const draft = [
@@ -11,16 +12,17 @@ export const ProjectInfoPage = () => {
     { title: "Acuerdo de obra", status: 2 },
     { title: "Materiales", status: 3 },
   ] as DocumentItemProps[];
-
+  const navigate = useNavigate()
   return (
     <ReturnLayout
       backgroundColor="bg-customOrange"
-      returnFunction={() => {}}
+      returnFunction={() => navigate(-1)}
       title="Proyecto"
       paddingContent={false}
     >
       {/* Detalle del proyecto */}
       <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
+        
         <ProjectCircle />
         <div>
           <div className="flex gap-2">

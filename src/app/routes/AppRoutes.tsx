@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { NewProjectPage, HomePage, ProjectInfoPage, CreateBudgetPage, ProjectAgreementTabs } from "@/app/pages/";
+import { NewProjectPage, HomePage, ProjectInfoPage, CreateBudgetPage, ProjectAgreementTabs, ProfilePage,  } from "@/app/pages/";
 import { BottomNavBar } from "@/ui/components";
 
 export const AppRoutes = () => {
@@ -22,6 +22,9 @@ export const AppRoutes = () => {
         {/* region Presupuestos rutas */}
         <Route path="new-budget" element={<CreateBudgetPage />} />
         {/* endregion  */}
+        {/* region profile */}
+        <Route path="profile" element={<ProfilePage />} />
+        {/* endregion profile */}
 
         <Route path="/" element={<Navigate to="/home" />} />
       </Routes>

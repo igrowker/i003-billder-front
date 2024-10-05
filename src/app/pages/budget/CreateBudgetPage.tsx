@@ -14,7 +14,7 @@ const phases = [
   {
     phase: 1,
     title: 'Confirmá los datos',
-    component: <BudgetConfirmDataTab/>
+    component: <BudgetConfirmDataTab />
   },
   {
     phase: 2,
@@ -41,14 +41,15 @@ export const CreateBudgetPage = () => {
     startTransition(() => {
       setTab(phases[tab.phase])
 
-    })
+    });
+    if (isPending) return;
   }
   const handleGoBack = () => {
 
     if (tab.phase === CreateBudgetTabs.Initial) {
       startTransition(() => {
         setTab(phases.find((phase) => phase.phase == CreateBudgetTabs.Initial)!);
-        navigate('/')
+        navigate(-1)
 
       })
       return;
@@ -69,10 +70,15 @@ export const CreateBudgetPage = () => {
         <h4 className="font-medium text-customOrange text-xl mt-4 mb-2">Paso {tab.phase}: {tab.title}</h4>
         {tab.component}
       </div>
-      <ReusableButton onClick={handleChangeTab} className="mt-8">
-        Continuar
-       
-      </ReusableButton>
+      {
+        (tab.phase !== CreateBudgetTabs.End)
+        && (
+          <ReusableButton onClick={handleChangeTab} className="mt-8">
+            Continuar
+          </ReusableButton>
+
+        )
+      }
     </ReturnLayout>
   )
 }

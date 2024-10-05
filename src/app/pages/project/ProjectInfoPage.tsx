@@ -3,7 +3,8 @@ import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
 import { WhatsappIcon } from "@/assets/icons/";
 import { AddIcon } from "@/assets/icons/AddIcon";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
-import { FlotatingButton } from "@/ui/components/";
+import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const ProjectInfoPage = () => {
@@ -12,7 +13,12 @@ export const ProjectInfoPage = () => {
     { title: "Acuerdo de obra", status: 2 },
     { title: "Materiales", status: 3 },
   ] as DocumentItemProps[];
+
+
   const navigate = useNavigate()
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <ReturnLayout
       backgroundColor="bg-customOrange"
@@ -20,9 +26,8 @@ export const ProjectInfoPage = () => {
       title="Proyecto"
       paddingContent={false}
     >
-      {/* Detalle del proyecto */}
       <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
-        
+
         <ProjectCircle />
         <div>
           <div className="flex gap-2">
@@ -65,10 +70,30 @@ export const ProjectInfoPage = () => {
 
         <NotDataCreated text="No hay documentos en curso" />
       </div>
-      <FlotatingButton>
-        {" "}
+      <FlotatingButton onClick={() => setIsOpen(true)}>
         <AddIcon />
       </FlotatingButton>
+      <Modal isOpen={isOpen} title={'Titulo del proyecto'}>
+        <div className="space-y-4">
+          <p>Elige el tipo de documento</p>
+          <ReusableButton
+            onClick={() => {
+              setIsOpen(false);
+              navigate('/new-budget')
+            }}
+          >
+            Presupuesto
+          </ReusableButton>
+          <ReusableButton
+            onClick={() => {
+              setIsOpen(false);
+              navigate("/crear-acuerdo-obra");
+            }}
+          >
+            Acuerdo de obra
+          </ReusableButton>
+        </div>
+      </Modal>
     </ReturnLayout>
   );
 };

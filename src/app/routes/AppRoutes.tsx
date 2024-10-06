@@ -1,9 +1,16 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { NewProjectPage, HomePage, ProjectInfoPage, CreateBudgetPage, ProjectAgreementTabs } from "@/app/pages/";
+import {
+  NewProjectPage,
+  HomePage,
+  ProjectInfoPage,
+  CreateBudgetPage,
+  ProjectAgreementTabs,
+} from "@/app/pages/";
 import { BottomNavBar } from "@/ui/components";
+import ConfirmationPage from "../pages/confirmation/ConfirmationPage";
 
 export const AppRoutes = () => {
-  const excludeNavbarRoutes: string[] = [];
+  const excludeNavbarRoutes: string[] = ["/confirmation"];
   const location = useLocation();
 
   return (
@@ -22,6 +29,7 @@ export const AppRoutes = () => {
         {/* region Presupuestos rutas */}
         <Route path="new-budget" element={<CreateBudgetPage />} />
         {/* endregion  */}
+        <Route path="/confirmation" element={<ConfirmationPage />} />
 
         <Route path="/" element={<Navigate to="/home" />} />
       </Routes>

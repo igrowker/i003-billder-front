@@ -20,7 +20,7 @@ export const ProjectAgreementTab1 = ({
 
   return (
     <div className="flex flex-col gap-4 my-6">
-      <h1 className="text-2xl font-semibold mb-6 text-customOrange">
+      <h1 className="text-xl font-semibold mb-6 text-customOrange">
         Paso 1: Confirmar datos
       </h1>
 
@@ -28,17 +28,20 @@ export const ProjectAgreementTab1 = ({
       <UserInfoCard data={user} />
 
       <div className="mt-2">
+        <label htmlFor="" className="text-lg font-semibold">
+          Descripción de la obra
+        </label>
         <input
           type="text"
           id="detalles"
-          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customOrange"
-          placeholder="Detalles"
+          className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-customOrange"
+          placeholder="Construcción casa (cocina, comedor, baño et.)"
           value={detalles}
           onChange={handleDetallesChange}
         />
       </div>
 
-      <div className="my-16">
+      <div className="my-6">
         <ReusableButton onClick={handleContinue}>continuar</ReusableButton>
       </div>
     </div>

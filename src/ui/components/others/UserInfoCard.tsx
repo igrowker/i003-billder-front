@@ -17,15 +17,15 @@ export const UserInfoCard = ({ data, onClick }: UserInfoProps) => {
       </div>
       <h2 className="font-medium text-xl">{data.name}</h2>
       <div className="text-gray-700 text-sm flex flex-col gap-1">
-        <p ><span className="uppercase">DNI: </span> <span>{data?.dni}</span></p>
+        <p>
+          <span className="uppercase">DNI: </span> <span>{data?.dni}</span>
+        </p>
         <p>{data?.email}</p>
         <p>
-          {data?.direccion}, 
-          {data.ciudad}
+          {data?.direccion},{data.ciudad}
           {data?.pais}
         </p>
       </div>
     </div>
   );
 };
-

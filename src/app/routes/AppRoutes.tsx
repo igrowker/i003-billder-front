@@ -1,9 +1,17 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { NewProjectPage, HomePage, ProjectInfoPage, CreateBudgetPage, ProjectAgreementTabs, ProfilePage,  } from "@/app/pages/";
+import {
+  NewProjectPage,
+  HomePage,
+  ProjectInfoPage,
+  CreateBudgetPage,
+  ProjectAgreementTabs,
+  ProfilePage
+} from "@/app/pages/";
 import { BottomNavBar } from "@/ui/components";
+import ConfirmationPage from "../pages/confirmation/ConfirmationPage";
 
 export const AppRoutes = () => {
-  const excludeNavbarRoutes: string[] = [];
+  const excludeNavbarRoutes: string[] = [""];
   const location = useLocation();
 
   return (
@@ -13,7 +21,7 @@ export const AppRoutes = () => {
         {/* Coloca tus rutas para las paginas principales */}
         {/* <Route path="path de la ruta" element={<Pagina />} /> */}
         <Route path="/home" element={<HomePage />} />
-        <Route path="/crear-acuerdo-obra" element={<ProjectAgreementTabs />} />
+        <Route path="/crear-acuerdo-obra/:projectId" element={<ProjectAgreementTabs />} />
 
         {/* region Proyectos rutas */}
         <Route path="/new-project" element={<NewProjectPage />} />
@@ -25,7 +33,7 @@ export const AppRoutes = () => {
         {/* region profile */}
         <Route path="profile" element={<ProfilePage />} />
         {/* endregion profile */}
-
+        <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/" element={<Navigate to="/home" />} />
       </Routes>
     </div>

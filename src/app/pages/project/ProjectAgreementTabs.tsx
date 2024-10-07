@@ -1,7 +1,12 @@
 import { ReturnLayout } from "@/layouts/ReturnLayout";
-import { useState, useTransition } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ProjectAgreementTab1, ProjectAgreementTab2, ProjectAgreementTab3, ProjectAgreementTab4 } from "@/app/pages/project";
+import { useEffect, useState, useTransition } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ProjectAgreementTab1 } from "./ProjectAgreementTab1";
+import { ProjectAgreementTab3 } from "./ProjectAgreementTab3";
+import { ProjectAgreementTab4 } from "./ProjectAgreementTab4";
+import { ProjectAgreementTab2 } from "./ProjectAgreementTab2";
+import { Project } from "@/app/types";
+import { projects } from "@/mock";
 
 enum ProjectTabs {
   Initial = 1,
@@ -12,12 +17,18 @@ enum ProjectTabs {
 
 export const ProjectAgreementTabs = () => {
   const [isPending, startTransition] = useTransition();
-  const navigate = useNavigate();
   const [tab, setTab] = useState(ProjectTabs.Initial);
-  
-  const location = useLocation();
-  const projectData = location.state;
-  
+
+  const [projectData, setProjectData] = useState<Project | undefined>();
+
+  const navigate = useNavigate();
+  const { projectId } = useParams();
+
+  useEffect(() => {
+    const selectedProject = projects.find(p => p.id === Number(projectId));
+    setProjectData(selectedProject);
+  }, [projectId]);
+
   const handleNextTab = () => {
     const nextTab = tab == ProjectTabs.EndTab ? null : tab + 1;
     if (nextTab === null) return;
@@ -47,13 +58,12 @@ export const ProjectAgreementTabs = () => {
         />
       )}
       {tab === ProjectTabs.paymentMethod && (
-        <ProjectAgreementTab2 /* handleContinue={handleNextTab} */ />
+        <ProjectAgreementTab2 handleContinue={handleNextTab} />
       )}
       {tab === ProjectTabs.paymentTerms && (
-        <ProjectAgreementTab3 /* handleContinue={handleNextTab} */ />
+        <ProjectAgreementTab3 handleContinue={handleNextTab} />
       )}
       {tab === ProjectTabs.EndTab && <ProjectAgreementTab4 />}
     </ReturnLayout>
   );
 };
-

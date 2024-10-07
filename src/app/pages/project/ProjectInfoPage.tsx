@@ -1,11 +1,13 @@
 import { NotDataCreated, PayInfoCard, ProjectCircle } from "@/app/components";
 import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
+import { Project } from "@/app/types";
 import { WhatsappIcon } from "@/assets/icons/";
 import { AddIcon } from "@/assets/icons/AddIcon";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
+import { projects } from "@/mock";
 import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ProjectInfoPage = () => {
   const draft = [
@@ -14,10 +16,16 @@ export const ProjectInfoPage = () => {
     { title: "Materiales", status: 3 },
   ] as DocumentItemProps[];
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { projectId } = useParams();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [project, setProject] = useState<Project | undefined>();
+
+  useEffect(() => {
+    const selectedProject = projects.find(p => p.id === Number(projectId));
+    setProject(selectedProject);
+  }, [projectId]);
 
   return (
     <ReturnLayout
@@ -27,25 +35,24 @@ export const ProjectInfoPage = () => {
       paddingContent={false}
     >
       <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
-
         <ProjectCircle />
         <div>
           <div className="flex gap-2">
-            <h4 className="font-medium text-lg">Casa San Isidro</h4>
+            <h4 className="font-medium text-lg">{project?.title}</h4>
             <button>
               <WhatsappIcon />
             </button>
           </div>
           <div className="text-gray-700 text-sm">
             <div className="mt-1 flex gap-4 ">
-              <p>María Martinez</p>
+              <p>{project?.owner}</p>
               <p>
-                <span>DNI:</span> <span>48432171</span>
+                <span>DNI:</span> <span>{project?.dni}</span>
               </p>
             </div>
-            <p>maria.martinez@gmail.com</p>
+            <p>{project?.email}</p>
             <p>
-              <span>Av. Juan B. Justo 2548, San Isidro, Buenos Aires</span>
+              <span>{project?.direccion}</span>
             </p>
           </div>
         </div>
@@ -73,13 +80,13 @@ export const ProjectInfoPage = () => {
       <FlotatingButton onClick={() => setIsOpen(true)}>
         <AddIcon />
       </FlotatingButton>
-      <Modal isOpen={isOpen} title={'Titulo del proyecto'}>
+      <Modal isOpen={isOpen} title={"Titulo del proyecto"}>
         <div className="space-y-4">
           <p>Elige el tipo de documento</p>
           <ReusableButton
             onClick={() => {
               setIsOpen(false);
-              navigate('/new-budget')
+              navigate("/new-budget");
             }}
           >
             Presupuesto
@@ -87,7 +94,7 @@ export const ProjectInfoPage = () => {
           <ReusableButton
             onClick={() => {
               setIsOpen(false);
-              navigate("/crear-acuerdo-obra");
+              navigate(`/crear-acuerdo-obra/${projectId}`);
             }}
           >
             Acuerdo de obra

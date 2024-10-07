@@ -1,4 +1,6 @@
-export const projects = [
+import { Project, User } from "@/app/types";
+
+export const projects: Project[] = [
   {
     id: 1,
     title: "Casa San Isidro",
@@ -55,7 +57,7 @@ export const projects = [
     pais: "Argentina",
   },
 ];
-export const user = {
+export const user: User = {
   name: "Carlos Jiménez",
   email: "carlo.gomez@example.com",
   dni: "87654321Y",

@@ -23,7 +23,7 @@ export const InputText = ({
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [canPasswordSee, setCanPasswordSee] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);  
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleTogglePasswordSee = () => {
     setCanPasswordSee(prev => !prev);
   };
@@ -36,11 +36,13 @@ export const InputText = ({
     setIsFocused(false);
   };
 
-  const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} `;
+  const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
   const outlinedBlackStyle = "focus:ring-2 focus:ring-orange/600";
 
   const finalStyle =
     variant === InputStyles.Normal ? normalStyle : outlinedBlackStyle;
+
+
 
   return (
     <div className="relative ">
@@ -70,6 +72,7 @@ export const InputText = ({
                 if (e.target.value.length === 0) handleBlur();
               }}
               className={`
+
                     ${finalStyle}
                     rounded-[4px]  
                     ${isFocused ? '' : 'placeholder:text-transparent'}

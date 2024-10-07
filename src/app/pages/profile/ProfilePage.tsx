@@ -1,5 +1,5 @@
 import { ReturnLayout } from "@/layouts/ReturnLayout"
-import { InputText, ProfileCircle } from "@/ui/components"
+import { InputText, ProfileCircle, ReusableButton } from "@/ui/components"
 import { useNavigate } from "react-router-dom"
 
 
@@ -24,20 +24,24 @@ export const ProfilePage = () => {
                 <div>
                     <h2 className="font-medium text-xl mb-4">Mis datos</h2>
                     <form className="grid grid-cols-1 gap-6">
-                        <InputText labelText="Nombre completo" placeholder="Nombre completo" />
-                        <InputText labelText="DNI" placeholder="Tu DNI" />
-                        <InputText labelText="Dirección" placeholder="Dirección" />
+                        <InputText id="name" disabled  labelText="Nombre completo" placeholder="Nombre completo" />
+                        <InputText id="dni" disabled  labelText="DNI" placeholder="Tu DNI" />
+                        <InputText id="adress" disabled labelText="Dirección" placeholder="Dirección" />
                         <div className="grid grid-cols-2 gap-4">
-                            <InputText labelText="País" placeholder="Argentina" />
-                            <InputText labelText="Ciudad" placeholder="Quilmes" />
+                            <InputText id="country"  disabled labelText="País" placeholder="Argentina" />
+                            <InputText id="city"  disabled labelText="Ciudad" placeholder="Quilmes" />
                         </div>
-                        <InputText labelText="Provincia" placeholder="Buenos Aires" />
-                        <InputText labelText="Teléfono" placeholder="Teléfono" />
+                        <InputText id="state" disabled  labelText="Provincia" placeholder="Buenos Aires" />
+                        <InputText id="phone" disabled  labelText="Teléfono" placeholder="Teléfono" />
+                        <div className="mt-4">
+                            <h3 className="font-medium text-xl">Firma registrada</h3>
+                            <InputText  id="signature" disabled labelText="Joaquin Feola" />
+                        </div>
+                        <ReusableButton type="submit" disabled>
+                            Guardar
+                        </ReusableButton>
                     </form>
-                    <div className="mt-4">
-                        <h3 className="font-medium text-xl">Firma registrada</h3>
-                        <h3>Firma digital</h3>
-                    </div>
+
                 </div>
             </div>
 

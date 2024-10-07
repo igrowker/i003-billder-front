@@ -54,9 +54,7 @@ export function HomePage() {
           projects.map((project, index) => (
             <ProyectCard
               key={index}
-              title={project.title}
-              owner={project.owner}
-              status={project.status}
+              data={project}
               onClick={() => navigate(`/project/${project.id}`)}
             />
           ))

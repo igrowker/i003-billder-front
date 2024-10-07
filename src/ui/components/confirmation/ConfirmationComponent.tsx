@@ -24,7 +24,7 @@ export const ConfirmationComponent = ({
   }, []);
 
   return (
-    <div className="h-screen bg-yellow-400 flex flex-col justify-between">
+    <div className="h-screen bg-yellow-400 flex flex-col justify-between fixed inset-0 z-[9999]">
       <div className="flex justify-center items-center p-3 bg-yellow-400 shadow-md shadow-black/20">
         <h3 className="text-lg font-medium">{title}</h3>
       </div>

@@ -12,7 +12,7 @@ export const FullScreenLoader = ({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-[9999]">
       <Spinner />
       <p className="mt-8 text-gray-600">{message}</p>
     </div>

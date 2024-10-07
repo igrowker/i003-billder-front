@@ -10,7 +10,7 @@ import { BottomNavBar } from "@/ui/components";
 import ConfirmationPage from "../pages/confirmation/ConfirmationPage";
 
 export const AppRoutes = () => {
-  const excludeNavbarRoutes: string[] = ["/confirmation"];
+  const excludeNavbarRoutes: string[] = [""];
   const location = useLocation();
 
   return (
@@ -20,7 +20,7 @@ export const AppRoutes = () => {
         {/* Coloca tus rutas para las paginas principales */}
         {/* <Route path="path de la ruta" element={<Pagina />} /> */}
         <Route path="/home" element={<HomePage />} />
-        <Route path="/crear-acuerdo-obra" element={<ProjectAgreementTabs />} />
+        <Route path="/crear-acuerdo-obra/:projectId" element={<ProjectAgreementTabs />} />
 
         {/* region Proyectos rutas */}
         <Route path="/new-project" element={<NewProjectPage />} />

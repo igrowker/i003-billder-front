@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState } from "react";
+import { InputHTMLAttributes, useRef, useState } from "react";
 import { InputStyles } from "@/interfaces";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -23,7 +23,7 @@ export const InputText = ({
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [canPasswordSee, setCanPasswordSee] = useState(false);
-
+  const inputRef = useRef<HTMLInputElement>(null);  
   const handleTogglePasswordSee = () => {
     setCanPasswordSee(prev => !prev);
   };
@@ -60,9 +60,10 @@ export const InputText = ({
           {labelText}
         </span>
 
-        {type == "text"  || type == "number" ? (
+        {type == "text" || type == "number" ? (
           <div className="">
             <input
+              ref={inputRef}
               autoComplete="off"
               onFocus={handleFocus}
               onBlur={e => {
@@ -71,11 +72,12 @@ export const InputText = ({
               className={`
                     ${finalStyle}
                     rounded-[4px]  
-                    ${isFocused ? '' : 'placeholder:text-transparent' }
+                    ${isFocused ? '' : 'placeholder:text-transparent'}
                     min-h-[50px] 
                     ${fullWidth ? "w-full" : ""}
                     shadow-md 
                     px-4 
+                    
                     transition-all
                     ease-in
                     duration-100
@@ -87,12 +89,15 @@ export const InputText = ({
           </div>
         ) : (
           <div
+
             className={`${finalStyle}
               rounded-[6px]  
               min-h-[50px] 
               max-h-[50px]
               h-[50px]
               shadow-md 
+              ${isFocused ? '' : 'placeholder:text-transparent'}
+              ${fullWidth ? "w-full" : ""}
               
               transition-all
               ease-in
@@ -103,6 +108,7 @@ export const InputText = ({
                flex`}
           >
             <input
+              ref={inputRef}
               autoComplete="off"
               onFocus={handleFocus}
               onBlur={e => {
@@ -119,7 +125,7 @@ export const InputText = ({
             {/* Código hardcodeado, crear componentes de iconos de: Ojo abierto y Ojo cerrado */}
             <button
               type="button"
-              className="bg-white px-2 text-customOrange"
+              className={`bg-white px-2 ${isFocused ? 'text-customOrange' : 'text-gray-500'}`}
               onClick={handleTogglePasswordSee}
             >
               {canPasswordSee ? (

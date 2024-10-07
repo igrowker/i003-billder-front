@@ -5,7 +5,7 @@ import { useState, useTransition } from "react"
 import { useNavigate } from "react-router-dom"
 
 
-enum CreateBudgetTabs {
+const enum CreateBudgetTabs {
   Initial = 1,
   Payment = 2,
   End = 3

@@ -9,7 +9,7 @@ enum CreateBudgetTabs {
   Initial = 1,
   Payment = 2,
   End = 3
-}
+};
 const phases = [
   {
     phase: 1,

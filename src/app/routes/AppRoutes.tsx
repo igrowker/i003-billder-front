@@ -5,6 +5,7 @@ import {
   ProjectInfoPage,
   CreateBudgetPage,
   ProjectAgreementTabs,
+  ProfilePage
 } from "@/app/pages/";
 import { BottomNavBar } from "@/ui/components";
 import ConfirmationPage from "../pages/confirmation/ConfirmationPage";
@@ -29,8 +30,10 @@ export const AppRoutes = () => {
         {/* region Presupuestos rutas */}
         <Route path="new-budget" element={<CreateBudgetPage />} />
         {/* endregion  */}
+        {/* region profile */}
+        <Route path="profile" element={<ProfilePage />} />
+        {/* endregion profile */}
         <Route path="/confirmation" element={<ConfirmationPage />} />
-
         <Route path="/" element={<Navigate to="/home" />} />
       </Routes>
     </div>

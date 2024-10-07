@@ -1,8 +1,4 @@
-import {
-  NewProjectIcon,
-  UserCircleIcon,
-  BellIcon,
-} from "@/assets/icons";
+import { NewProjectIcon, UserCircleIcon, BellIcon } from "@/assets/icons";
 import {
   ActionCard,
   IngresosPendientes,
@@ -51,26 +47,22 @@ export function HomePage() {
           onClick={crearNuevoProject}
         />
       </div>
-      
+
       <div className="">
         <h2 className="font-medium text-2xl mb-2">Mis proyectos</h2>
-        {
-          (projects.length > 0)
-            ? (
-              projects.map((project, index) => (
-                <ProyectCard
-                  key={index}
-                  title={project.title}
-                  owner={project.owner}
-                  status={project.status}
-                />
-              ))
-            ) : (
-              // Si no hay proyectos, muestra un mensaje
-              <NotDataCreated text="Aún no creaste proyectos" />
-            )}
+        {projects.length > 0 ? (
+          projects.map((project, index) => (
+            <ProyectCard
+              key={index}
+              data={project}
+              onClick={() => navigate(`/project/${project.id}`)}
+            />
+          ))
+        ) : (
+          // Si no hay proyectos, muestra un mensaje
+          <NotDataCreated text="Aún no creaste proyectos" />
+        )}
       </div>
-
     </div>
   );
 }

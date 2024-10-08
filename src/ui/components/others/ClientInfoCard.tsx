@@ -2,7 +2,7 @@ import { Project } from "@/app/types";
 import { PencilIcon } from "@/assets/icons/PencilIcon";
 
 interface ClientInfoProps {
-  data: Project | undefined;
+  data: Partial<Project> ;
   onClick?: () => void;
 }
 

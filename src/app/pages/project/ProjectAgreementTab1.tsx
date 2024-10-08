@@ -5,7 +5,7 @@ import { user } from "@/mock";
 
 interface ProjectAgreementTab1Props {
   handleContinue: () => void;
-  projectData: Project | undefined;
+  projectData: Project;
 }
 
 export const ProjectAgreementTab1 = ({

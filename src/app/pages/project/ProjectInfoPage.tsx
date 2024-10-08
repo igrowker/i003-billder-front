@@ -80,13 +80,17 @@ export const ProjectInfoPage = () => {
       <FlotatingButton onClick={() => setIsOpen(true)}>
         <AddIcon />
       </FlotatingButton>
-      <Modal isOpen={isOpen} title={"Titulo del proyecto"}>
+      <Modal
+        isOpen={isOpen}
+        title={"Titulo del proyecto"}
+        onClose={() => setIsOpen(false)}
+      >
         <div className="space-y-4">
           <p>Elige el tipo de documento</p>
           <ReusableButton
             onClick={() => {
               setIsOpen(false);
-              navigate("/new-budget");
+              navigate(`/new-budget/${projectId}`);
             }}
           >
             Presupuesto

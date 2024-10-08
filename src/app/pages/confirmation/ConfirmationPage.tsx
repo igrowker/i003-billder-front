@@ -1,14 +1,16 @@
 import { ConfirmationComponent } from "@/ui/components/confirmation";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmationPage = () => {
+  const navigate = useNavigate();
   const handleFinalize = () => {
-    console.log("Proceso finalizado");
+    navigate("/home");
   };
 
   return (
     <ConfirmationComponent
       title="Confirmación"
-      message="El acuerdo de obra fue creado y enviado exitosamente"
+      message="El documento fue creado y enviado exitosamente"
       onFinalize={handleFinalize}
     />
   );

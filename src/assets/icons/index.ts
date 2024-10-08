@@ -18,3 +18,4 @@ export * from "./ArrowDownIcon";
 export * from "./SearchIcon";
 export * from "./PencilIcon";
 export * from "./CheckIcon";
+export * from "./CloseIcon";

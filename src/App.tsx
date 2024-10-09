@@ -5,11 +5,13 @@ import { useAuthStore } from "./store/authStore";
 import { AlertsProvider } from "./context/AlertsProvider";
 
 export const App = () => {
-  useConfigureInterceptors();
   const checkToken = useAuthStore(state => state.checkToken)
+  useConfigureInterceptors();
+  
   useEffect(() => {
     checkToken()
   }, []);
+
   return (
     <div className="max-w-[800px]  mx-auto">
       <AlertsProvider>

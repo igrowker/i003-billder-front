@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import {
   NewProjectPage,
   HomePage,
@@ -19,15 +19,16 @@ export const AppRoutes = () => {
       {!excludeNavbarRoutes.includes(location.pathname) && <BottomNavBar />}
       <Routes>
         {/* Rutas principales */}
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/crear-acuerdo-obra/:projectId"
           element={<ProjectAgreementTabs />}
         />
 
-        {/* Rutas de proyectos */}
+        {/* Rutas de proyectos y clientes */}
         <Route path="/new-client" element={<NewProjectPage />} />
         <Route path="/client/:clientId/project/:projectId" element={<ProjectInfoPage />} />
+        <Route path="/client/:clientId/" element={<ProjectInfoPage />} />
 
         {/* Rutas de presupuestos */}
         <Route path="new-budget/:projectId" element={<CreateBudgetPage />} />
@@ -39,7 +40,7 @@ export const AppRoutes = () => {
         <Route path="/confirmation" element={<ConfirmationPage />} />
 
         {/* Redirección a Home */}
-        <Route path="/*" element={<Navigate to="/home" />} />
+        <Route path="/*" element={<div>Not found</div>} />
       </Routes>
     </div>
   );

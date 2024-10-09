@@ -21,6 +21,7 @@ export const BudgetCalcTab = ({ onItemsChange }: BudgetCalcTabProps) => {
   useEffect(() => {
     onItemsChange(items);
   }, [items, onItemsChange]);
+  
   const handleAddItem = () => {
     if (nombre && quantity && precio) {
       const newItem: Item = {

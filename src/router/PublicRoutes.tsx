@@ -9,9 +9,12 @@ interface PublicRoutesProps {
 
 export const PublicRoutes = ({ children }: PublicRoutesProps) => {
     const { authStatus, user } = useAuthStore(useShallow(state => ({ user: state.user, authStatus: state.authStatus })))
-    return (authStatus === AuthStatus.Checking )
-        ? <FullScreenLoader isVisible={true} />
-        : (authStatus === AuthStatus.NotAuthenticated && user.token === null)
-            ? children
-            : <Navigate to="/" />
+    
+    
+    return (authStatus === AuthStatus.Checking)
+    ? <FullScreenLoader isVisible />
+    : (authStatus === AuthStatus.NotAuthenticated && user.token === null )
+        ? children
+        : (authStatus === AuthStatus.Authenticated && user.token !== null)
+        && <Navigate to={'/'} />
 }

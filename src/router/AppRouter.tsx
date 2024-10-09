@@ -4,6 +4,7 @@ import { AppRoutes } from "@/app/routes/AppRoutes";
 import { PrivateRoutes, PublicRoutes } from "./";
 
 export const AppRouter = () => {
+
   return (
     <Routes>
       <Route

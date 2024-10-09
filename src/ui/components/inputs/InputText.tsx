@@ -37,8 +37,8 @@ export const InputText = ({
     setIsFocused(false);
   };
   useEffect(() => {
-    if (inputRef.current && inputRef.current?.value.length > 0 ) return inputRef.current?.focus();
-  }, [inputRef.current?.value]);
+    if (inputRef.current && inputRef.current?.value.length > 0 || attributes.defaultValue != '' ) return inputRef.current?.focus();
+  }, [inputRef.current?.value, attributes.defaultValue]);
 
   const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
   const outlinedBlackStyle = "focus:ring-2 focus:ring-orange/600";

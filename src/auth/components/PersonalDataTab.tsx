@@ -1,35 +1,75 @@
-import { CameraIcon } from "@/assets/icons";
-import { ProfileCircle, InputText, ReusableButton } from "@/ui/components/";
+// import { CameraIcon } from "@/assets/icons";
+import { FormCheckedValues, onInputChangeFunc } from "@/hooks/useForm";
+import { UserRegisterCredentials } from "@/interfaces/request";
+import { /* ProfileCircle */ InputText, ReusableButton } from "@/ui/components/";
 
 interface PersonalDataTabProps {
   handleContinue: () => void;
+  formState: UserRegisterCredentials,
+  onInputChange: onInputChangeFunc;
+  formValidations:  FormCheckedValues<UserRegisterCredentials>
+
 }
 
-export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
+export const PersonalDataTab = ({ handleContinue, formState, onInputChange }: PersonalDataTabProps) => {
   return (
     <div className="h-full flex-grow flex  flex-col gap-4">
       <div className="flex-grow">
         <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">
           Completá con tus datos personales
         </h3>
-        <ProfileCircle middleIcon={<CameraIcon />} />
-        <div className="flex flex-col gap-5">
-          <InputText id="fullname" labelText="Nombre y apellido" />
-          <InputText id="dni" labelText="DNI" />
-          <InputText id="adress" labelText="Dirección" />
+        {/* <ProfileCircle middleIcon={<CameraIcon />} /> */}
+        <div className="flex flex-col gap-5 mt-4">
+          <InputText
+            name="fullName"
+            value={formState.fullName}
+            onChange={onInputChange}
+            id="fullname"
+            labelText="Nombre y
+           apellido" />
+          <InputText
+            name="dni"
+            value={formState.dni}
+            onChange={onInputChange}
+            id="dni"
+            labelText="DNI"
+          />
+          <InputText
+            name="address"
+            value={formState.address}
+            onChange={onInputChange}
+            id="adress"
+            labelText="Dirección"
+          />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <InputText id="country" labelText="País" />
-            <InputText id="city" labelText="Ciudad" />
+            <InputText
+              name="country"
+              value={formState.country}
+              onChange={onInputChange}
+              id="country"
+              labelText="País"
+            />
+            <InputText
+              name="city"
+              value={formState.city}
+              onChange={onInputChange}
+              id="city"
+              labelText="Ciudad"
+            />
           </div>
-          <InputText id="province" labelText="Provincia" />
-          <InputText id="phone" labelText="Teléfono" />
+          <InputText
+            name="phoneNumber"
+            value={formState.phoneNumber}
+            onChange={onInputChange}
+            id="phone"
+            labelText="Teléfono"
+          />
         </div>
-        <div
+        {/* <div
           className="text-black bg-customOrange mt-8 rounded-lg px-8 pt-2 pb-5 cursor-pointer "
           onClick={handleContinue}
         >
           <h3 className="text-md font-medium flex items-center justify-center  gap-3 mb-2">
-            {/* hardcodeado crear componente icono de firma */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -45,10 +85,10 @@ export const PersonalDataTab = ({ handleContinue }: PersonalDataTabProps) => {
           <p className="font-light text-left mx-auto flex justify-center">
             Guardá tu firma para firmar tus docmuentos de manera más rápida.
           </p>
-        </div>
+        </div> */}
       </div>
 
-      <ReusableButton onClick={handleContinue}>Continuar</ReusableButton>
+      <ReusableButton type="button" onClick={handleContinue}>Continuar</ReusableButton>
     </div>
   );
 };

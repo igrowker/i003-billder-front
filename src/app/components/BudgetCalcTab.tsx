@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddCircleIcon } from "@/assets/icons";
 import { InputText } from "@/ui/components";
 
@@ -8,13 +8,19 @@ interface Item {
   precio: number;
 }
 
-export const BudgetCalcTab = () => {
+interface BudgetCalcTabProps {
+  onItemsChange: (items: Item[]) => void;
+}
+
+export const BudgetCalcTab = ({ onItemsChange }: BudgetCalcTabProps) => {
   const [items, setItems] = useState<Item[]>([]);
   const [nombre, setNombre] = useState("");
   const [quantity, setQuantity] = useState("");
   const [precio, setPrecio] = useState("");
 
-  // Función para añadir un nuevo artículo
+  useEffect(() => {
+    onItemsChange(items);
+  }, [items, onItemsChange]);
   const handleAddItem = () => {
     if (nombre && quantity && precio) {
       const newItem: Item = {
@@ -23,23 +29,18 @@ export const BudgetCalcTab = () => {
         precio: parseFloat(precio),
       };
 
-      // Actualizar el estado con el nuevo artículo
       setItems([...items, newItem]);
-
-      // Limpiar los inputs
       setNombre("");
       setQuantity("");
       setPrecio("");
     }
   };
 
-  // Calcular el total global
   const totalGlobal = items.reduce(
     (total, item) => total + item.quantity * item.precio,
     0
   );
 
-  // Formatea los números como moneda en pesos argentinos
   const formatCurrency = (value: number): string => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",

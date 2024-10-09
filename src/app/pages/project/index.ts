@@ -1,4 +1,4 @@
-export * from "./NewProjectPage";
+export * from "../client/NewClientPage";
 export * from "./ProjectInfoPage";
 export * from "./ProjectAgreementTab1";
 export * from "./ProjectAgreementTab2";

@@ -9,20 +9,20 @@ export const useConfigureInterceptors = () => {
     const { authStatus, logoutUser, user } = useAuthStore((state) => state);
     
     const requestInterceptor = (config: InternalAxiosRequestConfig) => {
-        if ( config.url == '/Auth/login' || config.url == '/Auth/register' ) return config;
-        const token = getItemFromLocalStorage(import.meta.env.auth_ls_key) as string | null;
+        if ( config.url == '/auth/login' || config.url == '/auth/register' ) return config;
+        const token = getItemFromLocalStorage(import.meta.env.VITE_AUTH_KEY) as string | null;
         if ( token === null ) {
             logoutUser();
             return config;
         };
 
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `${token}`;
         return config;
     }
 
     useEffect(() => {
         httpClient.interceptors.request.use(requestInterceptor)
-    }, [ authStatus, user ]);
+    }, [authStatus, user]);
 
 }
 

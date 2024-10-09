@@ -1,4 +1,4 @@
-import { NotDataCreated, PayInfoCard, ProjectCircle } from "@/app/components";
+import { NotDataCreated, PayInfoCard, IconBlueCircle } from "@/app/components";
 import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
 import { Project } from "@/app/types";
 import { WhatsappIcon } from "@/assets/icons/";
@@ -35,7 +35,7 @@ export const ProjectInfoPage = () => {
       paddingContent={false}
     >
       <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
-        <ProjectCircle />
+        <IconBlueCircle />
         <div>
           <div className="flex gap-2">
             <h4 className="font-medium text-lg">{project?.title}</h4>

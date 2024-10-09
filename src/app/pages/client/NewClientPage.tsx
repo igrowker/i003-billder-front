@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { InputText, ReusableButton } from "@/ui/components/";
-import { ProjectCircle } from "@/app/components";
+import { IconBlueCircle } from "@/app/components";
+import { PersonIcon } from "@/assets/icons";
 
 export const NewProjectPage = () => {
   const navigate = useNavigate();
   return (
     <ReturnLayout
       isPending={false}
-      title="Nuevo proyecto"
+      title="Nuevo cliente"
       returnFunction={() => navigate("/")}
     >
       <div className="mt-4 grid place-content-center">
-        <ProjectCircle />
+        <IconBlueCircle icon={<PersonIcon />} />
       </div>
 
       <h3 className="font-medium  pt-2 pb-2 text-lg ">

@@ -1,4 +1,4 @@
-import { NewProjectIcon, UserCircleIcon, BellIcon } from "@/assets/icons";
+import { UserCircleIcon, BellIcon, PersonAddIcon } from "@/assets/icons";
 import {
   ActionCard,
   IngresosPendientes,
@@ -8,13 +8,19 @@ import {
 import { useNavigate } from "react-router-dom";
 import { projects, user } from "@/mock";
 import { NotDataCreated } from "@/app/components";
+import { useClientStore } from "@/store/clientStore";
 
 export function HomePage() {
   const navigate = useNavigate();
 
-  const crearNuevoProject = () => {
-    navigate("/new-project");
+  const d = useClientStore((state) => state.getClients)
+  const createNewClient = () => {
+    navigate("/new-client");
+    d()
   };
+
+  
+
 
   return (
     <div className="  p-4 flex flex-col  ">
@@ -42,14 +48,14 @@ export function HomePage() {
       <div className="flex justify-between flex-grow mb-8">
         <ActionCard
           fullWidth
-          icon={<NewProjectIcon />}
-          label="Nuevo Proyecto"
-          onClick={crearNuevoProject}
+          icon={<PersonAddIcon />}
+          label="Nuevo cliente"
+          onClick={createNewClient}
         />
       </div>
 
       <div className="">
-        <h2 className="font-medium text-2xl mb-2">Mis proyectos</h2>
+        <h2 className="font-medium text-2xl mb-2">Mis clientes</h2>
         {projects.length > 0 ? (
           projects.map((project, index) => (
             <ProyectCard

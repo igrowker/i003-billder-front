@@ -26,8 +26,8 @@ export const AppRoutes = () => {
         />
 
         {/* Rutas de proyectos */}
-        <Route path="/new-project" element={<NewProjectPage />} />
-        <Route path="project/:projectId" element={<ProjectInfoPage />} />
+        <Route path="/new-client" element={<NewProjectPage />} />
+        <Route path="/client/:clientId/project/:projectId" element={<ProjectInfoPage />} />
 
         {/* Rutas de presupuestos */}
         <Route path="new-budget/:projectId" element={<CreateBudgetPage />} />
@@ -39,7 +39,7 @@ export const AppRoutes = () => {
         <Route path="/confirmation" element={<ConfirmationPage />} />
 
         {/* Redirección a Home */}
-        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/*" element={<Navigate to="/home" />} />
       </Routes>
     </div>
   );

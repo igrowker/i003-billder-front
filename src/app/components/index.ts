@@ -1,4 +1,4 @@
-export * from "./ProjectCircle";
+export * from "./IconBlueCircle";
 export * from "./PayInfoCard";
 export * from "./BudgetContract";
 export * from "./NotDataCreated";

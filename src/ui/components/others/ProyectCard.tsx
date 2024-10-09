@@ -1,4 +1,4 @@
-import { ProjectCircle } from "@/app/components";
+import { IconBlueCircle } from "@/app/components";
 import { Project } from "@/app/types";
 import { ThreePointsIcon } from "@/assets/icons/";
 
@@ -14,7 +14,7 @@ export const ProyectCard = ({ data, onClick }: ProyectCardProps) => {
       onClick={onClick}
     >
       <div className="flex justify-between items-center gap-2">
-        <ProjectCircle />
+        <IconBlueCircle />
 
         <div className="flex flex-col w-full ml-2">
           <h3 className="text-lg font-semibold">{data.title}</h3>

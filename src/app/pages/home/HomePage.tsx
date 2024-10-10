@@ -36,7 +36,7 @@ export const HomePage = React.memo(() => {
             </div>
             <div className="flex flex-col">
               <h2 className="text-xl font-semibold">Hola</h2>
-              <span className="text-xl font-semibold">{user?.data.fullName}!</span>
+              <span className="text-xl font-semibold">{user?.data.fullName ?? ''}!</span>
             </div>
           </div>
           <div>

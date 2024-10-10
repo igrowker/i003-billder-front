@@ -35,19 +35,19 @@ const formValidations: FormValidation<UserRegisterCredentials> = {
   dni: [() => false, ""],
   fullName: [() => false, ""],
   phoneNumber: [() => false, ""],
-  email: [(value) => value.length > 0 &&  !value.includes('@'), "El email debe incluir una @"],
+  email: [(value) => value.length > 0 && !value.includes('@'), "El email debe incluir una @"],
   password: [() => false, ""],
   repeatPassword: [(value, formState) => value !== formState.password, "Las contraseñas no coinciden"]
 }
 
 export const RegisterPage = () => {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const registerUser = useAuthStore((state) => state.registerUser);
   const [isPending, startTransition] = useTransition();
   const [tab, setTab] = useState(RegisterTabs.Initial);
   const { formState, formValidation, onInputChange } = useForm(formInitialState, formValidations)
-  
+
   const handleNextTab = () => {
     const nextTab = tab == RegisterTabs.EndTab ? null : tab + 1;
     if (nextTab === null) return;
@@ -64,10 +64,12 @@ export const RegisterPage = () => {
   };
 
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registerUser(formState)
-      .then(() => navigate("auth/login"));
+    navigate('/auth/login')
+    const { hasErrors } = await registerUser(formState);
+    if (hasErrors) return navigate('/auth/register');
   };
 
   return (

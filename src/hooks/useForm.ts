@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 
 export type FormCheckedValues<T> = {
@@ -15,9 +15,11 @@ export const useForm = <T,>(initialState: T, formValidations: FormValidation<T>)
     const [formState, setFormState] = useState<T>(initialState);
     const [formValidation, setFormValidation] = useState<FormCheckedValues<T>>({} as FormCheckedValues<T>)
 
+    const isFormValid = useMemo(() => Object.values(formValidation).every(value => value === null), [formValidation]);
 
     useEffect(() => {
         createValidators();
+
     }, [formState]);
 
     const onInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, maxLenght?: number) => {
@@ -54,7 +56,7 @@ export const useForm = <T,>(initialState: T, formValidations: FormValidation<T>)
         setFormValidation(formCheckedValues);
     };
 
-    
+
 
 
     return {
@@ -63,6 +65,7 @@ export const useForm = <T,>(initialState: T, formValidations: FormValidation<T>)
         formValidation,
         resetFormValues,
         onInputChange,
+        isFormValid
     }
 
 

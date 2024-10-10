@@ -12,7 +12,7 @@ export const PublicRoutes = ({ children }: PublicRoutesProps) => {
     
     
     return (authStatus === AuthStatus.Checking)
-    ? <FullScreenLoader isVisible />
+    ? <FullScreenLoader isVisible={true} />
     : (authStatus === AuthStatus.NotAuthenticated && user.token === null )
         ? children
         : (authStatus === AuthStatus.Authenticated && user.token !== null)

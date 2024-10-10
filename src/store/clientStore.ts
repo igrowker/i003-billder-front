@@ -7,7 +7,8 @@ import { create } from "zustand";
 interface ClientStore {
     getClients: () => Promise<void>;
     clients: Client[];
-    createClient: (client: ClientRequest) => Promise<void>
+    createClient: (client: ClientRequest) => Promise<void>;
+    getClientById: (id: number) => Promise<Client | null >
 }
 
 export const useClientStore = create<ClientStore>((set) => ({
@@ -19,6 +20,17 @@ export const useClientStore = create<ClientStore>((set) => ({
 
         catch (err){
             console.log(err);
+            
+        }
+    },
+    getClientById: async (id: number) => {
+        try {
+            const { data } = await httpClient.get<Client>(`/Cliente/obtener-cliente/${id}`);
+            return data
+        }
+        catch {
+            // const error = err as AxiosError;
+            return null
             
         }
     },

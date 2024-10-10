@@ -5,8 +5,7 @@ import { ProjectAgreementTab1 } from "./ProjectAgreementTab1";
 import { ProjectAgreementTab3 } from "./ProjectAgreementTab3";
 import { ProjectAgreementTab4 } from "./ProjectAgreementTab4";
 import { ProjectAgreementTab2 } from "./ProjectAgreementTab2";
-import { Project } from "@/app/types";
-import { projects } from "@/mock";
+import { Project } from "@/interfaces";
 
 enum ProjectTabs {
   Initial = 1,
@@ -20,7 +19,7 @@ export const ProjectAgreementTabs = () => {
   const [tab, setTab] = useState(ProjectTabs.Initial);
 
   const [projectData, setProjectData] = useState<Project | undefined>();
-
+  const projects = [] as Project[]
   const navigate = useNavigate();
   const { projectId } = useParams();
 

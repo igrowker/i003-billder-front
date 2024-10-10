@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ReusableButton, ClientInfoCard, UserInfoCard } from "@/ui/components";
-import { Project } from "@/app/types";
-import { user } from "@/mock";
+import { Project } from "@/interfaces";
+import { useAuthStore } from "@/store/authStore";
 
 interface ProjectAgreementTab1Props {
   handleContinue: () => void;
@@ -13,7 +13,7 @@ export const ProjectAgreementTab1 = ({
   projectData,
 }: ProjectAgreementTab1Props) => {
   const [detalles, setDetalles] = useState("");
-
+  const {data: user} = useAuthStore(state => state.user);
   const handleDetallesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDetalles(e.target.value);
   };

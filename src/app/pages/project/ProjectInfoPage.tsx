@@ -1,10 +1,8 @@
 import { NotDataCreated, PayInfoCard, IconBlueCircle } from "@/app/components";
 import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
-import { Project } from "@/app/types";
 import { WhatsappIcon } from "@/assets/icons/";
 import { AddIcon } from "@/assets/icons/AddIcon";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
-import { projects } from "@/mock";
 import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";

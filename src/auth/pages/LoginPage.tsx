@@ -21,26 +21,26 @@ const formValidations: FormValidation<UserLoginCredentials> = {
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const { formState, onInputChange, formValidation } = useForm(formInitialState, formValidations) 
+  const { formState, onInputChange, formValidation } = useForm(formInitialState, formValidations)
   const loginUser = useAuthStore((state) => state.loginUser);
   const { newAlert } = useContext(AlertsContext);
 
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginUser(formState)
-      .then(() => {
-        newAlert({
-          type: 'success',
-          message: 'Inicio de sesión exitoso'
-        })
+    const { hasErrors, message } = await loginUser(formState)
+    if (hasErrors) {
+      newAlert({
+        type: 'error',
+        message
       })
-      .catch(() => {
-        newAlert({
-          type: 'error',
-          message: 'Ocurrió un error inesperado al iniciar sesion, intentalo nuevamente'
-        })
-      })
+      return;
+    };
+    navigate('/')
+    newAlert({
+      type: 'success',
+      message
+    })
   };
 
   return (

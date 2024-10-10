@@ -1,8 +1,8 @@
-import { Project } from "@/app/types";
 import { PencilIcon } from "@/assets/icons/PencilIcon";
+import { Client } from "@/interfaces";
 
 interface ClientInfoProps {
-  data: Partial<Project> | undefined ;
+  data: Partial<Client> | undefined ;
   onClick?: () => void;
 }
 
@@ -15,7 +15,7 @@ export const ClientInfoCard = ({ data, onClick }: ClientInfoProps) => {
           <PencilIcon />
         </button>
       </div>
-      <h3 className="font-medium text-xl">{data?.owner}</h3>
+      <h3 className="font-medium text-xl">{data?.nombre}</h3>
       <div className="text-gray-700 text-sm flex flex-col gap-1">
         <p>
           <span className="uppercase">DNI: </span> <span>{data?.dni}</span>

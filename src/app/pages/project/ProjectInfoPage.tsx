@@ -2,6 +2,7 @@ import { NotDataCreated, PayInfoCard, IconBlueCircle } from "@/app/components";
 import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
 import { WhatsappIcon } from "@/assets/icons/";
 import { AddIcon } from "@/assets/icons/AddIcon";
+import { Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
 import { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ export const ProjectInfoPage = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [project, setProject] = useState<Project | undefined>();
-
+  const projects = [] as Project [];
   useEffect(() => {
     const selectedProject = projects.find(p => p.id === Number(projectId));
     setProject(selectedProject);
@@ -36,21 +37,21 @@ export const ProjectInfoPage = () => {
         <IconBlueCircle />
         <div>
           <div className="flex gap-2">
-            <h4 className="font-medium text-lg">{project?.title}</h4>
+            <h4 className="font-medium text-lg">{project?.description}</h4>
             <button>
               <WhatsappIcon />
             </button>
           </div>
           <div className="text-gray-700 text-sm">
             <div className="mt-1 flex gap-4 ">
-              <p>{project?.owner}</p>
+              <p>{project?.description}</p>
               <p>
-                <span>DNI:</span> <span>{project?.dni}</span>
+                <span>DNI:</span> <span>{project?.description}</span>
               </p>
             </div>
-            <p>{project?.email}</p>
+            <p>{project?.description}</p>
             <p>
-              <span>{project?.direccion}</span>
+              <span>{project?.description}</span>
             </p>
           </div>
         </div>

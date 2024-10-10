@@ -8,7 +8,7 @@ interface ProjectStore {
 }
 
 
-export const useProjectStore = create<ProjectStore>((set) => ({
+export const useProjectStore = create<ProjectStore>(() => ({
     getProjects: async () => {
 
     },

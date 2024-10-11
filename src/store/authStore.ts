@@ -1,7 +1,7 @@
 import { httpClient } from "@/api/axios.config";
 import { User } from "@/interfaces";
 import { UserLoginCredentials, UserRegisterCredentials } from "@/interfaces/request";
-import { getItemFromLocalStorage, setItemToLocalStorage } from "@/utils/localstorage.util";
+import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from "@/utils/localstorage.util";
 import { create } from "zustand";
 
 
@@ -84,6 +84,7 @@ export const useAuthStore = create<AuthStore>(
 
         },
         logoutUser: () => {
+            removeItemFromLocalStorage(import.meta.env.VITE_AUTH_KEY)
             set({
                 authStatus: AuthStatus.NotAuthenticated,
                 user: { data: null, token: null }

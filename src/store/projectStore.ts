@@ -9,6 +9,7 @@ interface ProjectStore {
     getProjects: (clientId: number) => Promise<void>;
     createProject: (project: ProjectRequest) => Promise<void>;
     isLoading: boolean;
+    getProjectById: (id: number) => Promise<Project | null>
 
 }
 
@@ -24,6 +25,16 @@ export const useProjectStore = create<ProjectStore>((set) => ({
             console.log(error)
             set({ isLoading: false })
 
+        }
+    },
+    getProjectById: async (id) => {
+        try {
+            const project = await httpClient.get<Project>(`Trabajo/obtener-trabajo/${id}`);      
+            return project.data;
+        } 
+        catch (error) {
+            console.error(error)
+            return null
         }
     },
     createProject: async (project) => {

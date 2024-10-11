@@ -18,8 +18,8 @@ export const ProyectCard = ({ data, onClick }: ProyectCardProps) => {
 
         <div className="flex flex-col w-full ml-2">
           <h3 className="text-lg font-semibold">{data?.description}</h3>
-          <p className="text-gray-500">{data?.description}</p>
-          <p className="text-gray-400 text-sm">Estado: {data?.description}</p>
+          <p className="text-gray-500">{data?.fecha }</p>
+          <p className="text-gray-400 text-sm">Estado: {data?.estado}</p>
         </div>
         <ThreePointsIcon />
       </div>

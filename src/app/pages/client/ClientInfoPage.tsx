@@ -78,14 +78,19 @@ export const ClientInfoPage = () => {
                         projects.length === 0 ? (
                             <NotDataCreated text="Aún no tienes proyectos" />
                         ) : (
-                            projects.map((project, i) => <ProyectCard key={i} data={project}  />)
+                            projects.map((project, i) => (
+                                <ProyectCard
+                                    key={i}
+                                    data={project}
+                                    onClick={() => navigate(`project/${project.id}`)}
+                                />
+                            ))
                         )}
                 </div>
-                {/* <NotDataCreated  text="Aún no creaste documentos" /> */}
             </div>
 
             <FlotatingButton >
-                <Link to="new-project" state={{ clientId: clientId }}>
+                <Link to="new-project" >
                     <AddIcon />
                 </Link>
             </FlotatingButton>

@@ -1,3 +1,5 @@
+import { Client } from "@/interfaces";
+import { useAuthStore } from "@/store/authStore";
 import { Paper } from "@/ui/components/others/Paper";
 interface Item {
   nombre: string;
@@ -7,10 +9,16 @@ interface Item {
 
 interface BudgetContractProps {
   budgetItems: Item[];
+  client: Client | null | undefined;
 }
 
-export const BudgetContract = ({ budgetItems }: BudgetContractProps) => {
+export const BudgetContract = ({
+  client,
+  budgetItems,
+}: BudgetContractProps) => {
   const date = new Date();
+
+  const { data: user } = useAuthStore(state => state.user);
   const today =
     date.getUTCDate() + "/" + date.getUTCMonth() + "/" + date.getUTCFullYear();
   const datetimeExpiration = new Date(date.setMonth(date.getMonth() + 1));
@@ -21,7 +29,6 @@ export const BudgetContract = ({ budgetItems }: BudgetContractProps) => {
     "/" +
     datetimeExpiration.getUTCFullYear();
 
- 
   const formatCurrency = (value: number): string => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -39,21 +46,21 @@ export const BudgetContract = ({ budgetItems }: BudgetContractProps) => {
       <div className="flex justify-between ">
         <div>
           <h3 className="font-medium text-lg">Datos del cliente</h3>
-          <p>{"nombre"}</p>
-          <p>{"Direccion"}</p>
+          <p>{client?.nombre}</p>
+          <p>{client?.direccion}</p>
           <p>
-            {"Provincia"} {"Pais"}
+            {client?.ciudad} {client?.pais}
           </p>
-          <p>{"Email"}</p>
+          <p>{client?.email}</p>
         </div>
         <div>
           <h3 className="font-medium text-lg">Datos del emisor</h3>
-          <p>{"nombre"}</p>
-          <p>{"Direccion"}</p>
+          <p>{user?.fullName}</p>
+          <p>{user?.address}</p>
           <p>
-            {"Provincia"} {"Pais"}
+            {user?.city} {user?.country}
           </p>
-          <p>{"Email"}</p>
+          <p>{user?.email}</p>
         </div>
       </div>
 

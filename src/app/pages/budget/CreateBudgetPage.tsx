@@ -3,10 +3,13 @@ import {
   BudgetConfirmDataTab,
   BudgetViewDocumentTab,
 } from "@/app/components";
+import { Client, Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
+import { useClientStore } from "@/store/clientStore";
+import { useProjectStore } from "@/store/projectStore";
 import { Modal, ReusableButton } from "@/ui/components";
-import { useState, useTransition } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useTransition } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Item {
   nombre: string;
@@ -22,15 +25,44 @@ enum CreateBudgetTabs {
 
 export const CreateBudgetPage = () => {
   const navigate = useNavigate();
+  const { projectId } = useParams();
+
   const [showModal, setShowModal] = useState(false);
   const [tab, setTab] = useState(CreateBudgetTabs.Initial);
   const [budgetItems, setBudgetItems] = useState<Item[]>([]);
+
+  const [project, setProject] = useState<Project | null>();
+  const [client, setClient] = useState<Client | null>();
+
+  const getClientById = useClientStore(state => state.getClientById);
+  const getProjectById = useProjectStore(state => state.getProjectById);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      const res = await getProjectById(Number(projectId));
+      setProject(res);
+    };
+
+    fetchProject();
+  }, [projectId, getProjectById]);
+
+  // Obtener el cliente una vez que el proyecto esté disponible
+  useEffect(() => {
+    if (project && project.clienteId) {
+      const fetchClient = async () => {
+        const res = await getClientById(project.clienteId);
+        setClient(res);
+      };
+
+      fetchClient();
+    }
+  }, [project, getClientById]);
 
   const phases = [
     {
       phase: CreateBudgetTabs.Initial,
       title: "Confirmá los datos",
-      component: <BudgetConfirmDataTab />,
+      component: <BudgetConfirmDataTab client={client} />,
     },
     {
       phase: CreateBudgetTabs.Payment,
@@ -44,7 +76,7 @@ export const CreateBudgetPage = () => {
     {
       phase: CreateBudgetTabs.End,
       title: "¡Todo listo!",
-      component: <BudgetViewDocumentTab budgetItems={budgetItems} />,
+      component: <BudgetViewDocumentTab budgetItems={budgetItems} client={client} />,
     },
   ];
 

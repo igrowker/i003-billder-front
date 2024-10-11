@@ -71,6 +71,7 @@ export const InputText = ({
             <input
               ref={inputRef}
               autoComplete="off"
+
               onFocus={handleFocus}
               onBlur={e => {
                 if (e.target.value.length === 0) handleBlur();

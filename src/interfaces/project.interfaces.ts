@@ -3,7 +3,7 @@ import { Client } from "./client.interfaces";
 export interface Project {
     clienteId:   number;
     description: string;
-    fecha:       Date;
+    fecha:       string;
     estado:      string;
     // presupuesto: null;
     // contrato:    null;

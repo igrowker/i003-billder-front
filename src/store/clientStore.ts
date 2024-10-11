@@ -8,19 +8,23 @@ interface ClientStore {
     getClients: () => Promise<void>;
     clients: Client[];
     createClient: (client: ClientRequest) => Promise<void>;
-    getClientById: (id: number) => Promise<Client | null >
+    getClientById: (id: number) => Promise<Client | null>;
+    isLoading: boolean;
 }
 
 export const useClientStore = create<ClientStore>((set) => ({
     getClients: async () => {
+        set({ isLoading: true })
         try {
+
             const { data } = await httpClient.get<Client[]>('/Cliente/obtener-clientes')
-            set({ clients: data })
+            set({ clients: data, isLoading: false })
         }
 
-        catch (err){
+        catch (err) {
             console.log(err);
-            
+            set({ isLoading: false })
+
         }
     },
     getClientById: async (id: number) => {
@@ -31,17 +35,18 @@ export const useClientStore = create<ClientStore>((set) => ({
         catch {
             // const error = err as AxiosError;
             return null
-            
+
         }
     },
-    createClient: async(client) => {
+    createClient: async (client) => {
         try {
             await httpClient.post('/Cliente/crear-cliente', client)
-        } 
+        }
         catch (error) {
-            console.log(error)    
+            console.log(error)
         }
     },
-    clients: []
+    clients: [],
+    isLoading: false,
 })
 )

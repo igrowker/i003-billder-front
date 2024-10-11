@@ -36,7 +36,7 @@ const formValidations: FormValidation<ClientRequest> = {
 }
 
 
-export const NewProjectPage = () => {
+export const NewClientPage = () => {
   const navigate = useNavigate();
   const { formState, onInputChange, isFormValid, formValidation } = useForm(formInitialState, formValidations)
   const createClient = useClientStore(state => state.createClient);

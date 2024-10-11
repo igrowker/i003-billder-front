@@ -1,15 +1,18 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import {
-  NewProjectPage,
   HomePage,
   ProjectInfoPage,
   CreateBudgetPage,
   ProjectAgreementTabs,
   ProfilePage,
+  ClientInfoPage,
+  ConfirmationPage,
+  NewClientPage,
+  NewProjectPage
+
 } from "@/app/pages/";
 import { BottomNavBar } from "@/ui/components";
-import ConfirmationPage from "../pages/confirmation/ConfirmationPage";
-import { ClientInfoPage } from "../pages/client/ClientInfoPage";
+import { NotFoundPage } from "../pages/NotFoundPage";
 
 export const AppRoutes = () => {
   const excludeNavbarRoutes: string[] = [""]; // Excluir rutas donde no quieres el BottomNavBar
@@ -27,7 +30,8 @@ export const AppRoutes = () => {
         />
 
         {/* Rutas de proyectos y clientes */}
-        <Route path="/new-client" element={<NewProjectPage />} />
+        <Route path="/new-client" element={<NewClientPage />} />
+        <Route path="/client/:clientId/new-project" element={<NewProjectPage />} />
         <Route path="/client/:clientId/project/:projectId" element={<ProjectInfoPage />} />
         <Route path="/client/:clientId/" element={<ClientInfoPage />} />
 
@@ -41,7 +45,7 @@ export const AppRoutes = () => {
         <Route path="/confirmation" element={<ConfirmationPage />} />
 
         {/* Redirección a Home */}
-        <Route path="/*" element={<Navigate to="/"/>} />
+        <Route path="/*" element={<NotFoundPage/>} />
       </Routes>
     </div>
   );

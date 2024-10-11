@@ -1,7 +1,7 @@
 import { ConfirmationComponent } from "@/ui/components/confirmation";
 import { useNavigate } from "react-router-dom";
 
-const ConfirmationPage = () => {
+export const ConfirmationPage = () => {
   const navigate = useNavigate();
   const handleFinalize = () => {
     navigate("/home");
@@ -16,4 +16,3 @@ const ConfirmationPage = () => {
   );
 };
 
-export default ConfirmationPage;

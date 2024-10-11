@@ -1,6 +1,6 @@
 import { IconBlueCircle } from "@/app/components";
-import { Project } from "@/app/types";
 import { ThreePointsIcon } from "@/assets/icons/";
+import { Project } from "@/interfaces";
 
 interface ProyectCardProps {
   data: Project;
@@ -17,9 +17,9 @@ export const ProyectCard = ({ data, onClick }: ProyectCardProps) => {
         <IconBlueCircle />
 
         <div className="flex flex-col w-full ml-2">
-          <h3 className="text-lg font-semibold">{data.title}</h3>
-          <p className="text-gray-500">{data.owner}</p>
-          <p className="text-gray-400 text-sm">Estado: {data.status}</p>
+          <h3 className="text-lg font-semibold">{data?.description}</h3>
+          <p className="text-gray-500">{data?.fecha }</p>
+          <p className="text-gray-400 text-sm">Estado: {data?.estado}</p>
         </div>
         <ThreePointsIcon />
       </div>

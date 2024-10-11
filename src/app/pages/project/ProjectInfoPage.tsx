@@ -1,8 +1,9 @@
 import { NotDataCreated, PayInfoCard, IconBlueCircle } from "@/app/components";
 import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
-import { WhatsappIcon } from "@/assets/icons/";
 import { AddIcon } from "@/assets/icons/AddIcon";
+import { Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
+import { useProjectStore } from "@/store/projectStore";
 import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,13 +17,21 @@ export const ProjectInfoPage = () => {
 
   const navigate = useNavigate();
   const { projectId } = useParams();
+  const getProjectById = useProjectStore(state => state.getProjectById);
+
+
 
   const [isOpen, setIsOpen] = useState(false);
-  const [project, setProject] = useState<Project | undefined>();
+  const [project, setProject] = useState<Project >();
+
+  const getProject = async () => {
+    const project = await getProjectById(Number(projectId))
+    if ( project === null ) return;
+    setProject(project)
+}
 
   useEffect(() => {
-    const selectedProject = projects.find(p => p.id === Number(projectId));
-    setProject(selectedProject);
+    getProject();
   }, [projectId]);
 
   return (
@@ -35,24 +44,8 @@ export const ProjectInfoPage = () => {
       <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
         <IconBlueCircle />
         <div>
-          <div className="flex gap-2">
-            <h4 className="font-medium text-lg">{project?.title}</h4>
-            <button>
-              <WhatsappIcon />
-            </button>
-          </div>
-          <div className="text-gray-700 text-sm">
-            <div className="mt-1 flex gap-4 ">
-              <p>{project?.owner}</p>
-              <p>
-                <span>DNI:</span> <span>{project?.dni}</span>
-              </p>
-            </div>
-            <p>{project?.email}</p>
-            <p>
-              <span>{project?.direccion}</span>
-            </p>
-          </div>
+          {project?.description}
+        
         </div>
       </div>
       <div className=" -translate-y-1/2 -translate-x-1/2 relative left-1/2">

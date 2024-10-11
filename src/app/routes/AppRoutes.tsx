@@ -13,6 +13,7 @@ import {
 } from "@/app/pages/";
 import { BottomNavBar } from "@/ui/components";
 import { NotFoundPage } from "../pages/NotFoundPage";
+import { HelpPage } from "../pages/help";
 
 export const AppRoutes = () => {
   const excludeNavbarRoutes: string[] = [""]; // Excluir rutas donde no quieres el BottomNavBar
@@ -40,6 +41,8 @@ export const AppRoutes = () => {
 
         {/* Ruta de perfil */}
         <Route path="profile" element={<ProfilePage />} />
+        {/* Ruta de help */}
+        <Route path="help" element={<HelpPage />} />
 
         {/* Ruta de confirmación */}
         <Route path="/confirmation" element={<ConfirmationPage />} />

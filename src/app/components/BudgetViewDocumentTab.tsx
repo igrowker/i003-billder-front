@@ -4,6 +4,7 @@ import { FullScreenLoader } from "@/ui/components/spinner";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BudgetContract } from "./BudgetContract";
+import { Client } from "@/interfaces";
 
 interface Item {
   nombre: string;
@@ -13,9 +14,13 @@ interface Item {
 
 interface BudgetViewDocumentTabProps {
   budgetItems: Item[];
+  client: Client | null | undefined;
 }
 
-export const BudgetViewDocumentTab = ({ budgetItems }: BudgetViewDocumentTabProps) => {
+export const BudgetViewDocumentTab = ({
+  budgetItems,
+  client,
+}: BudgetViewDocumentTabProps) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -30,9 +35,10 @@ export const BudgetViewDocumentTab = ({ budgetItems }: BudgetViewDocumentTabProp
   return (
     <div>
       <h3 className="font-medium">
-        Revisá el documento y envialo a tu cliente para confirmar el presupuesto.
+        Revisá el documento y envialo a tu cliente para confirmar el
+        presupuesto.
       </h3>
-      <BudgetContract budgetItems={budgetItems} />
+      <BudgetContract budgetItems={budgetItems} client={client} />
       <div className="flex items-center gap-4">
         <OutlineButton className="" onClick={handleSend}>
           <ShareIcon />

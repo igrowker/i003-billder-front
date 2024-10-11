@@ -19,16 +19,15 @@ export const ProjectInfoPage = () => {
   const { projectId } = useParams();
   const getProjectById = useProjectStore(state => state.getProjectById);
 
-
-
   const [isOpen, setIsOpen] = useState(false);
-  const [project, setProject] = useState<Project >();
+  const [project, setProject] = useState<Project>();
 
   const getProject = async () => {
-    const project = await getProjectById(Number(projectId))
-    if ( project === null ) return;
-    setProject(project)
-}
+    const project = await getProjectById(Number(projectId));
+    console.log("🚀 ~ getProject ~ project:", project);
+    if (project === null) return;
+    setProject(project);
+  };
 
   useEffect(() => {
     getProject();
@@ -43,10 +42,7 @@ export const ProjectInfoPage = () => {
     >
       <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
         <IconBlueCircle />
-        <div>
-          {project?.description}
-        
-        </div>
+        <div>{project?.description}</div>
       </div>
       <div className=" -translate-y-1/2 -translate-x-1/2 relative left-1/2">
         <PayInfoCard />

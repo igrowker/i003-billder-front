@@ -1,15 +1,13 @@
-import { ReturnLayout } from "@/layouts/ReturnLayout"
+import { BasicLayout } from "@/layouts/BasicLayout"
 import { useAuthStore } from "@/store/authStore"
 import { InputText, ProfileCircle, ReusableButton } from "@/ui/components"
-import { useNavigate } from "react-router-dom"
 
 
 
 export const ProfilePage = () => {
-    const navigate = useNavigate()
     const user = useAuthStore(state => state.user);
     return (
-        <ReturnLayout
+        <BasicLayout
             canEdit={{
                 isEditing: true,
                 onClick() {
@@ -19,7 +17,6 @@ export const ProfilePage = () => {
             title="Perfil"
             paddingContent={true}
 
-            returnFunction={() => navigate(-1)}
         >
             <div>
                 <ProfileCircle />
@@ -87,6 +84,6 @@ export const ProfilePage = () => {
             </div>
 
 
-        </ReturnLayout>
+        </BasicLayout>
     )
 }

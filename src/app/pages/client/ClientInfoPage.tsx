@@ -28,7 +28,7 @@ export const ClientInfoPage = () => {
 
     useEffect(() => {
         getClientAndProjects()
-
+        console.log(clientId)
     }, [clientId]);
 
 

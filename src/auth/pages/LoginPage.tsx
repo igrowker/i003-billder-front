@@ -32,14 +32,14 @@ export const LoginPage = () => {
     if (hasErrors) {
       newAlert({
         type: 'error',
-        message
+        message: message
       })
       return;
     };
     navigate('/')
     newAlert({
       type: 'success',
-      message
+      message: message
     })
   };
 

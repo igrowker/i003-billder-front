@@ -1,32 +1,37 @@
-import { IconBlueCircle } from "@/app/components";
+import { IconBlueCircle, NotDataCreated } from "@/app/components";
 import { PersonIcon, WhatsappIcon } from "@/assets/icons";
 import { AddIcon } from "@/assets/icons/AddIcon";
 import { Client } from "@/interfaces/client.interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useClientStore } from "@/store/clientStore";
-import { FlotatingButton, } from "@/ui/components";
+import { useProjectStore } from "@/store/projectStore";
+import { FlotatingButton, ProyectCard, } from "@/ui/components";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useShallow } from 'zustand/shallow';
 
 
 
 export const ClientInfoPage = () => {
     const navigate = useNavigate();
     const { clientId } = useParams();
-
     const getClientByid = useClientStore(state => state.getClientById);
+    const { getProjects, projects } = useProjectStore(useShallow(state => ({ getProjects: state.getProjects, projects: state.projects })));
+
     const [client, setClient] = useState<Client | null>(null);
 
+    const getClientAndProjects = async () => {
+        const client = await getClientByid(Number(clientId))
+        setClient(client)
+        getProjects(Number(clientId))
+    }
 
     useEffect(() => {
-        getClientByid(Number(clientId))
-            .then(d => {
-                setClient(d)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+        getClientAndProjects()
+
+    }, [clientId]);
+
+
 
 
     return (
@@ -36,7 +41,7 @@ export const ClientInfoPage = () => {
             title="Cliente"
             canEdit={{
                 isEditing: true,
-                onClick: () => {}
+                onClick: () => { }
             }}
             paddingContent={false}
         >
@@ -64,21 +69,27 @@ export const ClientInfoPage = () => {
             </div>
 
 
+
+
             <div className="p-6">
                 <h4 className="font-medium text-2xl mb-2">Trabajos</h4>
-                <div className="grid-cols-1 gap-2 grid">
-                    {/* {draft.length === 0 ? (
-                        <NotDataCreated text="Aún no creaste documentos" />
-                    ) : (
-                        draft.map((d, i) => <DocumentItem key={i} {...d} />)
-                    )} */}
+                <div className="grid-cols-1  grid">
+                    {
+                        projects.length === 0 ? (
+                            <NotDataCreated text="Aún no tienes proyectos" />
+                        ) : (
+                            projects.map((project, i) => <ProyectCard key={i} data={project}  />)
+                        )}
                 </div>
                 {/* <NotDataCreated  text="Aún no creaste documentos" /> */}
             </div>
 
             <FlotatingButton >
-                <AddIcon />
+                <Link to="new-project" state={{ clientId: clientId }}>
+                    <AddIcon />
+                </Link>
             </FlotatingButton>
+
 
         </ReturnLayout>
     )

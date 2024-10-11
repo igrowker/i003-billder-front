@@ -25,7 +25,7 @@ export const ProjectAgreementTab1 = ({
       </h1>
 
       <ClientInfoCard data={projectData} />
-      <UserInfoCard data={user} />
+      <UserInfoCard data={user!} />
 
       <div className="mt-2">
         <label htmlFor="" className="text-lg font-semibold">

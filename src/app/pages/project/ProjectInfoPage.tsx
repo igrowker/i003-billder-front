@@ -17,6 +17,9 @@ export const ProjectInfoPage = () => {
 
   const navigate = useNavigate();
   const { projectId } = useParams();
+  
+
+
 
   const [isOpen, setIsOpen] = useState(false);
   const [project, setProject] = useState<Project | undefined>();

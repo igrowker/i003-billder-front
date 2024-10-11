@@ -19,7 +19,7 @@ export const BudgetConfirmDataTab = () => {
   return (
     <div className="flex flex-col gap-4">
       <ClientInfoCard data={project} />
-      <UserInfoCard data={user} />
+      <UserInfoCard data={user!} />
       <DateTimeInput />
     </div>
   );

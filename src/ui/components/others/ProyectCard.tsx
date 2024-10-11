@@ -17,9 +17,9 @@ export const ProyectCard = ({ data, onClick }: ProyectCardProps) => {
         <IconBlueCircle />
 
         <div className="flex flex-col w-full ml-2">
-          <h3 className="text-lg font-semibold">{data.description}</h3>
-          <p className="text-gray-500">{data.description}</p>
-          <p className="text-gray-400 text-sm">Estado: {data.description}</p>
+          <h3 className="text-lg font-semibold">{data?.description}</h3>
+          <p className="text-gray-500">{data?.description}</p>
+          <p className="text-gray-400 text-sm">Estado: {data?.description}</p>
         </div>
         <ThreePointsIcon />
       </div>

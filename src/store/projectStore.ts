@@ -1,0 +1,51 @@
+import { httpClient } from "@/api/axios.config";
+import { Project } from "@/interfaces";
+import { ProjectRequest } from "@/interfaces/request";
+import { create } from "zustand";
+
+interface ProjectStore {
+  projects: Project[];
+  getProjects: (clientId: number) => Promise<void>;
+  createProject: (project: ProjectRequest) => Promise<void>;
+  isLoading: boolean;
+  getProjectById: (id: number) => Promise<Project | null>;
+}
+
+export const useProjectStore = create<ProjectStore>(set => ({
+  getProjects: async (clientId: number) => {
+    set({ isLoading: true });
+    try {
+      const { data } = await httpClient.get<Project[]>(
+        "/Trabajo/obtener-trabajos",
+        { params: { customerId: clientId } }
+      );
+      set({ projects: data, isLoading: false });
+    } catch (error) {
+      console.log(error);
+      set({ isLoading: false });
+    }
+  },
+  getProjectById: async id => {
+    try {
+      const project = await httpClient.get<Project>(
+        `Trabajo/obtener-job/${id}`
+      );
+      return project.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  createProject: async project => {
+    set({ isLoading: true });
+    try {
+      await httpClient.post("Trabajo/crear-trabajo", project);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+  isLoading: false,
+  projects: [],
+}));

@@ -46,7 +46,6 @@ export const CreateBudgetPage = () => {
     fetchProject();
   }, [projectId, getProjectById]);
 
-  // Obtener el cliente una vez que el proyecto esté disponible
   useEffect(() => {
     if (project && project.clienteId) {
       const fetchClient = async () => {
@@ -76,7 +75,9 @@ export const CreateBudgetPage = () => {
     {
       phase: CreateBudgetTabs.End,
       title: "¡Todo listo!",
-      component: <BudgetViewDocumentTab budgetItems={budgetItems} client={client} />,
+      component: (
+        <BudgetViewDocumentTab budgetItems={budgetItems} client={client} />
+      ),
     },
   ];
 
@@ -86,7 +87,6 @@ export const CreateBudgetPage = () => {
     if (tab === CreateBudgetTabs.End) return;
 
     if (tab === CreateBudgetTabs.Payment) {
-      // Muestra el modal al intentar continuar desde la fase 2
       setShowModal(true);
     } else {
       startTransition(() => {

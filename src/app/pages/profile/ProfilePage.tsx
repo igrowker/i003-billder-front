@@ -22,21 +22,21 @@ export const ProfilePage = () => {
             <InputText
               id="name"
               disabled
-              labelText="Nombre completo"
+              labelText=""
               placeholder="Nombre completo"
-              defaultValue={user.data?.dni}
+              defaultValue={user.data?.fullName}
             />
             <InputText
               id="dni"
               disabled
-              labelText="DNI"
+              labelText=""
               placeholder="Tu DNI"
               defaultValue={user.data?.dni}
             />
             <InputText
               id="adress"
               disabled
-              labelText="Dirección"
+              labelText=""
               placeholder="Dirección"
               defaultValue={user.data?.address}
             />
@@ -44,14 +44,14 @@ export const ProfilePage = () => {
               <InputText
                 id="country"
                 disabled
-                labelText="País"
+                labelText=""
                 placeholder="Argentina"
                 defaultValue={user.data?.country}
               />
               <InputText
                 id="city"
                 disabled
-                labelText="Ciudad"
+                labelText=""
                 placeholder="Quilmes"
                 defaultValue={user.data?.city}
               />
@@ -59,7 +59,7 @@ export const ProfilePage = () => {
             <InputText
               id="phone"
               disabled
-              labelText="Teléfono"
+              labelText=""
               placeholder="Teléfono"
               defaultValue={user.data?.phoneNumber}
             />

@@ -24,7 +24,10 @@ export const InputText = ({
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [canPasswordSee, setCanPasswordSee] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const handleTogglePasswordSee = () => {
     setCanPasswordSee(prev => !prev);
   };
@@ -37,16 +40,16 @@ export const InputText = ({
     setIsFocused(false);
   };
   useEffect(() => {
-    if (inputRef.current && inputRef.current?.value.length > 0 || attributes.defaultValue != '' ) return inputRef.current?.focus();
-  }, [inputRef.current?.value, attributes.defaultValue]);
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, []);
 
   const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
   const outlinedBlackStyle = "focus:ring-2 focus:ring-orange/600";
 
   const finalStyle =
     variant === InputStyles.Normal ? normalStyle : outlinedBlackStyle;
-
-
 
   return (
     <div className="relative ">
@@ -69,9 +72,8 @@ export const InputText = ({
         {type == "text" || type == "number" ? (
           <div className="">
             <input
-              ref={inputRef}
+              ref={emailRef}
               autoComplete="off"
-
               onFocus={handleFocus}
               onBlur={e => {
                 if (e.target.value.length === 0) handleBlur();
@@ -80,7 +82,7 @@ export const InputText = ({
 
                     ${finalStyle}
                     rounded-[4px]  
-                    ${isFocused ? '' : 'placeholder:text-transparent'}
+                    ${isFocused ? "" : "placeholder:text-transparent"}
                     min-h-[50px] 
                     ${fullWidth ? "w-full" : ""}
                     shadow-md 
@@ -97,14 +99,13 @@ export const InputText = ({
           </div>
         ) : (
           <div
-
             className={`${finalStyle}
               rounded-[6px]  
               min-h-[50px] 
               max-h-[50px]
               h-[50px]
               shadow-md 
-              ${isFocused ? '' : 'placeholder:text-transparent'}
+              ${isFocused ? "" : "placeholder:text-transparent"}
               ${fullWidth ? "w-full" : ""}
               
               transition-all
@@ -116,7 +117,7 @@ export const InputText = ({
                flex`}
           >
             <input
-              ref={inputRef}
+              ref={passwordRef}
               autoComplete="off"
               onFocus={handleFocus}
               onBlur={e => {
@@ -132,17 +133,18 @@ export const InputText = ({
             />
             <button
               type="button"
-              className={`bg-white px-2 ${isFocused ? 'text-customOrange' : 'text-gray-500'}`}
+              className={`bg-white px-2 ${isFocused ? "text-customOrange" : "text-gray-500"}`}
               onClick={handleTogglePasswordSee}
             >
-              { canPasswordSee ? <EyeOpen/> : <EyeClosed/> }
+              {canPasswordSee ? <EyeOpen /> : <EyeClosed />}
             </button>
           </div>
         )}
       </label>
       <span
-        className={`${hasErrors ? "text-red-500" : ""
-          } absolute top-[110%]  w-[calc(100%-4px)] text-xs select-none text-gray-600 left-1`}
+        className={`${
+          hasErrors ? "text-red-500" : ""
+        } absolute top-[110%]  w-[calc(100%-4px)] text-xs select-none text-gray-600 left-1`}
       >
         {supportText}
       </span>

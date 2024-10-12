@@ -8,9 +8,9 @@ interface DropdownProps {
 export const Dropdown = ({ title, content }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200 w-full"> 
       <button
-        className="w-full text-left py-4 px-6 flex justify-between items-center"
+        className="w-full text-left py-4 px-6 flex justify-between items-center" 
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{title}</span>

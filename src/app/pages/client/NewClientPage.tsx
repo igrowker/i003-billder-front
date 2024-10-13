@@ -22,14 +22,14 @@ const formInitialState: ClientRequest = {
 };
 
 const formValidations: FormValidation<ClientRequest> = {
-  ciudad: [value => value.length <= 0, "El campo no puede estar vacío"],
-  descripcion: [() => false, "El campo no puede estar vacío"],
-  dni: [value => value.length <= 0, "El campo no puede estar vacío"],
-  direccion: [value => value.length <= 0, "El campo no puede estar vacío"],
-  pais: [value => value.length <= 0, "El campo no puede estar vacío"],
-  nombre: [value => value.length <= 0, "El campo no puede estar vacío"],
-  provincia: [value => value.length <= 0, "El campo no puede estar vacío"],
-  telefono: [value => value.length <= 0, "El campo no puede estar vacío"],
+  ciudad: [value => value.length <= 0, ""],
+  descripcion: [() => false, ""],
+  dni: [value => value.length <= 0, ""],
+  direccion: [value => value.length <= 0, ""],
+  pais: [value => value.length <= 0, ""],
+  nombre: [value => value.length <= 0, ""],
+  provincia: [value => value.length <= 0, ""],
+  telefono: [value => value.length <= 0, ""],
   email: [value => !value.includes("@"), "El email debe incluir una @"],
 };
 
@@ -68,7 +68,7 @@ export const NewClientPage = () => {
         Completá datos del cliente
       </h3>
 
-      <form className="flex flex-col gap-8" onSubmit={onFormSubmit}>
+      <form className="flex flex-col gap-6" onSubmit={onFormSubmit}>
         <InputText
           autoFocus
           value={formState.nombre}
@@ -97,7 +97,25 @@ export const NewClientPage = () => {
           labelText="Dirección"
           onChange={onInputChange}
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <InputText
+          value={formState.ciudad}
+          name="ciudad"
+          required
+          supportText={formValidation.isCiudadValid ?? ""}
+          id="city"
+          labelText="Ciudad"
+          onChange={onInputChange}
+        />
+        <div className=" flex flex-row gap-4">
+          <InputText
+            value={formState.provincia}
+            name="provincia"
+            required
+            supportText={formValidation.isProvinciaValid ?? ""}
+            id="province"
+            labelText="Provincia"
+            onChange={onInputChange}
+          />
           <InputText
             value={formState.pais}
             name="pais"
@@ -107,25 +125,8 @@ export const NewClientPage = () => {
             labelText="País"
             onChange={onInputChange}
           />
-          <InputText
-            value={formState.ciudad}
-            name="ciudad"
-            required
-            supportText={formValidation.isCiudadValid ?? ""}
-            id="city"
-            labelText="Ciudad"
-            onChange={onInputChange}
-          />
         </div>
-        <InputText
-          value={formState.provincia}
-          name="provincia"
-          required
-          supportText={formValidation.isProvinciaValid ?? ""}
-          id="province"
-          labelText="Provincia"
-          onChange={onInputChange}
-        />
+
         <InputText
           value={formState.telefono}
           name="telefono"

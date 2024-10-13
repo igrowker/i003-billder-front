@@ -58,7 +58,7 @@ export const TextArea = ({
                     resize-none
                     ${normalStyle}
                     py-2
-                    rounded-[4px]  
+                    rounded-[8px]  
                     ${isFocused ? '' : 'placeholder:text-transparent'}
                     min-h-[50px] 
                     ${fullWidth ? "w-full" : ""}

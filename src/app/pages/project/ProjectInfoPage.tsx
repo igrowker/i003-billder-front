@@ -79,7 +79,7 @@ export const ProjectInfoPage = () => {
           <ReusableButton
             onClick={() => {
               setIsOpen(false);
-              navigate(`/new-budget/${projectId}`);
+              navigate(`new-budget/`);
             }}
           >
             Presupuesto

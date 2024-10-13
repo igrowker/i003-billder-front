@@ -75,6 +75,7 @@ export const NewClientPage = () => {
 
       <form className="flex flex-col gap-8" onSubmit={onFormSubmit}>
         <InputText
+          autoFocus
           value={formState.nombre}
           name="nombre"
           supportText={formValidation.isNombreValid ?? ''}

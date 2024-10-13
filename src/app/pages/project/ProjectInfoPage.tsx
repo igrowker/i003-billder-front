@@ -18,15 +18,16 @@ export const ProjectInfoPage = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const getProjectById = useProjectStore(state => state.getProjectById);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [project, setProject] = useState<Project>();
 
   const getProject = async () => {
-    const project = await getProjectById(Number(projectId));
-    console.log("🚀 ~ getProject ~ project:", project);
+    setIsLoading(true);
+    const project = await getProjectById(Number(projectId), (project) => setProject(project) );
+    setIsLoading(false)
     if (project === null) return;
-    setProject(project);
+
   };
 
   useEffect(() => {
@@ -51,14 +52,14 @@ export const ProjectInfoPage = () => {
         <h4 className="font-medium text-2xl mb-2">Documentos</h4>
         <div className="grid-cols-1 gap-2 grid">
           {
-            draft.length === 0 ? (
+            (draft.length === 0) 
+            ? (
               <NotDataCreated text="Aún no creaste documentos" />
             ) : (
               draft.map((d, i) => <DocumentItem key={i} {...d} />)
             )
           }
         </div>
-        {/* <NotDataCreated  text="Aún no creaste documentos" /> */}
       </div>
       <div className="p-6">
         <h4 className="font-medium text-2xl mb-2">Borradores</h4>

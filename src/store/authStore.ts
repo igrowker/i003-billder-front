@@ -16,7 +16,7 @@ export enum AuthStatus {
 interface AuthStore {
     user: { data: User | null, token: string | null };
     authStatus: AuthStatus,
-    registerUser: (credentials: UserRegisterCredentials) => Promise<ResponseBase>;
+    registerUser: (credentials: UserRegisterCredentials, navigate: (path: string) => void) => Promise<ResponseBase>;
     loginUser: (credentials: UserLoginCredentials) => Promise<ResponseBase>;
     logoutUser: () => void;
     checkToken: () => Promise<void>;
@@ -45,13 +45,13 @@ export const useAuthStore = create<AuthStore>(
                 }
             }
         },
-
-        registerUser: async (credentials) => {
-            set({ authStatus: AuthStatus.Checking })
+        
+        registerUser: async (credentials, navigate) => {
             try {
-
                 await httpClient.post("/Auth/register", credentials);
-                set({ authStatus: AuthStatus.NotAuthenticated })
+
+                
+                navigate('/auth/login')
 
                 return {
                     hasErrors: false,
@@ -61,13 +61,15 @@ export const useAuthStore = create<AuthStore>(
             catch (err) {
                 const error = err as AxiosError
                 set({ authStatus: AuthStatus.NotAuthenticated })
+
                 return {
                     hasErrors: true,
-                    message:  error.response?.data as string ?? error.message
+                    message: error.response?.data as string ?? error.message
                 }
             }
         },
         checkToken: async () => {
+            set({authStatus: AuthStatus.Checking})
             const token = getItemFromLocalStorage(import.meta.env.VITE_AUTH_KEY) as string | null;
             const logoutUser = get().logoutUser;
             try {

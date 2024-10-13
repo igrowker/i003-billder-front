@@ -50,7 +50,7 @@ export const NewProjectPage = () => {
       paddingContent={true}
     >
       <h3 className="font-medium my-4">Completá con los datos de la obra</h3>
-      <form onSubmit={onFormSubmit} className="flex flex-col gap-6">
+      <form onSubmit={onFormSubmit} className="flex flex-col gap-6 ">
         <TextArea
           required
           rows={3}

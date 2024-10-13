@@ -12,7 +12,7 @@ export const ProyectCard = ({ data, onClick }: ProyectCardProps) => {
   
   return (
     <div
-      className="bg-white shadow-lg rounded-lg p-4 mb-4 w-full cursor-pointer hover:bg-gray-100 transition-all"
+      className="bg-white shadow-lg rounded-xl p-4 mb-4 w-full cursor-pointer hover:bg-gray-100 transition-all"
       onClick={onClick}
     >
       <div className="flex justify-between items-center gap-2">

@@ -39,7 +39,7 @@ export const BudgetViewDocumentTab = ({
         presupuesto.
       </h3>
       <BudgetContract budgetItems={budgetItems} client={client} />
-      <div className="flex items-center gap-4">
+      <div className="mt-2 flex flex-col gap-4">
         <OutlineButton className="" onClick={handleSend}>
           <ShareIcon />
           <span className="mx-3">Compartir</span>

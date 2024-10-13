@@ -53,7 +53,7 @@ export const DateTimeInput = ({ className, labelText, hasErrors, supportText, fu
                       ${isFocused ? '' : 'text-transparent'}
                       ${normalStyle}
                       px-4 
-                      rounded-[4px]  
+                      rounded-[8px]  
                       min-h-[50px] 
                       transition-all
                       ease-in

@@ -20,7 +20,7 @@ export const FlotatingButton = forwardRef<
   const baseStyles = "rounded-lg shadow-md shadow-black/40 bg-gradient-to-r from-customYellow to-customOrange flex justify-center items-center text-customBlue";
 
  
-  const sizeStyles = "min-h-[56px] w-auto px-4 py-2 mx-5"; 
+  const sizeStyles = "min-h-[45px] w-auto px-4 py-2 mx-5"; 
 
   const finalButtonPosition = position === Position.TopLeft
     ? "top-[60px] left-2"

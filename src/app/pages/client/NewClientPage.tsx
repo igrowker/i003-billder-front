@@ -9,56 +9,51 @@ import { FormValidation, useForm } from "@/hooks/useForm";
 import { ClientRequest } from "@/interfaces/request/clientRequest.interfaces";
 import { AlertsContext } from "@/context/AlertsContext";
 
-
-
 const formInitialState: ClientRequest = {
-  ciudad: '',
-  descripcion: '',
-  dni: '',
-  email: '',
-  direccion: '',
-  pais: '',
-  nombre: '',
-  provincia: '',
-  telefono: '',
-}
+  ciudad: "",
+  descripcion: "",
+  dni: "",
+  email: "",
+  direccion: "",
+  pais: "",
+  nombre: "",
+  provincia: "",
+  telefono: "",
+};
 
 const formValidations: FormValidation<ClientRequest> = {
-  ciudad: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
+  ciudad: [value => value.length <= 0, "El campo no puede estar vacío"],
   descripcion: [() => false, "El campo no puede estar vacío"],
-  dni: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
-  direccion: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
-  pais: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
-  nombre: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
-  provincia: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
-  telefono: [(value) => value.length <= 0 , "El campo no puede estar vacío"],
-  email: [(value) => !value.includes('@'), "El email debe incluir una @"],
-}
-
+  dni: [value => value.length <= 0, "El campo no puede estar vacío"],
+  direccion: [value => value.length <= 0, "El campo no puede estar vacío"],
+  pais: [value => value.length <= 0, "El campo no puede estar vacío"],
+  nombre: [value => value.length <= 0, "El campo no puede estar vacío"],
+  provincia: [value => value.length <= 0, "El campo no puede estar vacío"],
+  telefono: [value => value.length <= 0, "El campo no puede estar vacío"],
+  email: [value => !value.includes("@"), "El email debe incluir una @"],
+};
 
 export const NewClientPage = () => {
   const navigate = useNavigate();
-  const { formState, onInputChange, isFormValid, formValidation } = useForm(formInitialState, formValidations)
+  const { formState, onInputChange, isFormValid, formValidation } = useForm(
+    formInitialState,
+    formValidations
+  );
   const createClient = useClientStore(state => state.createClient);
   const { newAlert } = useContext(AlertsContext);
-
-
 
   const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isFormValid) return;
 
-    createClient(formState)
-      .then(() => {
-        newAlert({
-          message: 'Cliente creado exitosamente',
-          type: 'success',
-        });
-        navigate("/");
+    createClient(formState).then(() => {
+      newAlert({
+        message: "Cliente creado exitosamente",
+        type: "success",
       });
-
-
-  }
+      navigate("/");
+    });
+  };
   return (
     <ReturnLayout
       isPending={false}
@@ -77,7 +72,7 @@ export const NewClientPage = () => {
         <InputText
           value={formState.nombre}
           name="nombre"
-          supportText={formValidation.isNombreValid ?? ''}
+          supportText={formValidation.isNombreValid ?? ""}
           required
           id="fullname"
           labelText="Nombre y apellido"
@@ -87,7 +82,7 @@ export const NewClientPage = () => {
           value={formState.dni}
           name="dni"
           required
-          supportText={formValidation.isDniValid ?? ''}
+          supportText={formValidation.isDniValid ?? ""}
           id="dni"
           labelText="DNI"
           onChange={onInputChange}
@@ -97,7 +92,7 @@ export const NewClientPage = () => {
           name="direccion"
           required
           id="address"
-          supportText={formValidation.isDireccionValid ?? ''}
+          supportText={formValidation.isDireccionValid ?? ""}
           labelText="Dirección"
           onChange={onInputChange}
         />
@@ -106,7 +101,7 @@ export const NewClientPage = () => {
             value={formState.pais}
             name="pais"
             required
-            supportText={formValidation.isPaisValid ?? ''}
+            supportText={formValidation.isPaisValid ?? ""}
             id="country"
             labelText="País"
             onChange={onInputChange}
@@ -115,7 +110,7 @@ export const NewClientPage = () => {
             value={formState.ciudad}
             name="ciudad"
             required
-            supportText={formValidation.isCiudadValid ?? ''}
+            supportText={formValidation.isCiudadValid ?? ""}
             id="city"
             labelText="Ciudad"
             onChange={onInputChange}
@@ -125,7 +120,7 @@ export const NewClientPage = () => {
           value={formState.provincia}
           name="provincia"
           required
-          supportText={formValidation.isProvinciaValid ?? ''}
+          supportText={formValidation.isProvinciaValid ?? ""}
           id="province"
           labelText="Provincia"
           onChange={onInputChange}
@@ -134,7 +129,7 @@ export const NewClientPage = () => {
           value={formState.telefono}
           name="telefono"
           required
-          supportText={formValidation.isTelefonoValid ?? ''}
+          supportText={formValidation.isTelefonoValid ?? ""}
           id="phone"
           labelText="Teléfono"
           onChange={onInputChange}
@@ -143,12 +138,14 @@ export const NewClientPage = () => {
           value={formState.email}
           name="email"
           required
-          supportText={formValidation.isEmailValid ?? ''}
+          supportText={formValidation.isEmailValid ?? ""}
           id="email"
           labelText="Correo electrónico"
           onChange={onInputChange}
         />
-        <ReusableButton className="mt-4" type="submit">Guardar</ReusableButton>
+        <ReusableButton className="mt-4" type="submit">
+          Guardar
+        </ReusableButton>
       </form>
     </ReturnLayout>
   );

@@ -1,6 +1,5 @@
 import { IconBlueCircle, NotDataCreated } from "@/app/components";
 import { PersonIcon, WhatsappIcon } from "@/assets/icons";
-import { AddIcon } from "@/assets/icons/AddIcon";
 import { Client } from "@/interfaces/client.interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useClientStore } from "@/store/clientStore";
@@ -74,7 +73,7 @@ export const ClientInfoPage = () => {
       </div>
 
       <div className="p-6">
-        <h4 className="font-medium text-2xl mb-2">Trabajos</h4>
+        <h4 className="font-medium text-2xl mb-2">Proyectos</h4>
         <div className="grid-cols-1  grid">
           {projects.length === 0 ? (
             <NotDataCreated text="Aún no tienes proyectos" />
@@ -90,9 +89,9 @@ export const ClientInfoPage = () => {
         </div>
       </div>
 
-      <FlotatingButton>
-        <Link to="new-project">
-          <AddIcon />
+      <FlotatingButton position="bottomRight">
+        <Link to="new-project" className="flex items-center">
+          <span className="ml-2">Añadir Proyecto</span>
         </Link>
       </FlotatingButton>
     </ReturnLayout>

@@ -28,7 +28,7 @@ export const useProjectStore = create<ProjectStore>(set => ({
   getProjectById: async id => {
     try {
       const project = await httpClient.get<Project>(
-        `Trabajo/obtener-job/${id}`
+        `Trabajo/obtener-trabajo/${id}`
       );
       return project.data;
     } catch (error) {

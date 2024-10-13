@@ -1,6 +1,5 @@
 import { NotDataCreated, PayInfoCard, IconBlueCircle } from "@/app/components";
 import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
-import { AddIcon } from "@/assets/icons/AddIcon";
 import { Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useProjectStore } from "@/store/projectStore";
@@ -24,7 +23,7 @@ export const ProjectInfoPage = () => {
 
   const getProject = async () => {
     const project = await getProjectById(Number(projectId));
-    console.log("🚀 ~ getProject ~ project:", project);
+
     if (project === null) return;
     setProject(project);
   };
@@ -65,7 +64,7 @@ export const ProjectInfoPage = () => {
         <NotDataCreated text="No hay documentos en curso" />
       </div>
       <FlotatingButton onClick={() => setIsOpen(true)}>
-        <AddIcon />
+        <span className="ml-2">Siguiente</span>
       </FlotatingButton>
       <Modal
         isOpen={isOpen}

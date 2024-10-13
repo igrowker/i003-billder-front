@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Importa useState
+import { useState } from "react"; // Importa useState
 import { PencilIcon } from "@/assets/icons/PencilIcon";
 import { Client } from "@/interfaces";
 
@@ -8,22 +8,18 @@ interface ClientInfoProps {
 }
 
 export const ClientInfoCard = ({ data, onClick }: ClientInfoProps) => {
- 
   const [isEditable, setIsEditable] = useState(false);
 
- 
   const handleEditClick = () => {
-    setIsEditable(!isEditable); 
+    setIsEditable(!isEditable);
     if (onClick) {
-      onClick(); 
+      onClick();
     }
   };
 
-  
   const handleSaveClick = () => {
-    
     console.log("Datos guardados");
-    setIsEditable(false); 
+    setIsEditable(false);
   };
 
   return (
@@ -91,7 +87,7 @@ export const ClientInfoCard = ({ data, onClick }: ClientInfoProps) => {
           )}
         </p>
       </div>
-      {isEditable && ( 
+      {isEditable && (
         <button
           onClick={handleSaveClick}
           className="mt-4 bg-customBlue text-white rounded px-4 py-2 hover:bg-blue-600" // Estilos para el botón

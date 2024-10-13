@@ -63,8 +63,8 @@ export const ProjectInfoPage = () => {
 
         <NotDataCreated text="No hay documentos en curso" />
       </div>
-      <FlotatingButton onClick={() => setIsOpen(true)}>
-        <span className="ml-2">Siguiente</span>
+      <FlotatingButton className="m-4"  onClick={() => setIsOpen(true)}>
+      <span >Siguiente</span>
       </FlotatingButton>
       <Modal
         isOpen={isOpen}

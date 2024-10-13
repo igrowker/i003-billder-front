@@ -60,6 +60,7 @@ export const LoginPage = () => {
           </legend>
           <div className="flex flex-col gap-10 mb-5">
             <InputText
+              autoFocus
               autoComplete="off"
               id="email"
               name="email"

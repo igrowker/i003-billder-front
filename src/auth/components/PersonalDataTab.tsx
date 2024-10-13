@@ -2,93 +2,88 @@
 import { FormCheckedValues, onInputChangeFunc } from "@/hooks/useForm";
 import { UserRegisterCredentials } from "@/interfaces/request";
 import { /* ProfileCircle */ InputText, ReusableButton } from "@/ui/components/";
+import React from "react";
 
 interface PersonalDataTabProps {
   handleContinue: () => void;
   formState: UserRegisterCredentials,
   onInputChange: onInputChangeFunc;
-  formValidations:  FormCheckedValues<UserRegisterCredentials>
+  formValidations: FormCheckedValues<UserRegisterCredentials>
 
 }
 
-export const PersonalDataTab = ({ handleContinue, formState, onInputChange }: PersonalDataTabProps) => {
+export const PersonalDataTab = React.memo(({ handleContinue, formState, onInputChange, formValidations }: PersonalDataTabProps) => {
+
   return (
-    <div className="h-full flex-grow flex  flex-col gap-4">
-      <div className="flex-grow">
+    <div className="h-full flex-grow flex    flex-col gap-4">
+      <div className="flex-grow mb-10" >
         <h3 className="font-medium  pt-2 pb-1 text-lg text-customOrange">
           Completá con tus datos personales
         </h3>
         {/* <ProfileCircle middleIcon={<CameraIcon />} /> */}
-        <div className="flex flex-col gap-5 mt-4">
+        <div className="flex flex-col gap-9 mt-2">
           <InputText
+            autoFocus
+            required
+            hasErrors={formValidations.isFullNameValid !== null}
             name="fullName"
             value={formState.fullName}
             onChange={onInputChange}
             id="fullname"
-            labelText="Nombre y
-           apellido" />
+            labelText="Nombre y apellido"
+            supportText={formValidations.isFullNameValid ?? ''}
+          />
           <InputText
             name="dni"
+            required
             value={formState.dni}
-            onChange={onInputChange}
+            onChange={(e) => onInputChange(e, true)}
             id="dni"
             labelText="DNI"
+            supportText={formValidations.isDniValid ?? ''}
           />
           <InputText
             name="address"
+            required
             value={formState.address}
             onChange={onInputChange}
             id="adress"
             labelText="Dirección"
+            supportText={formValidations.isAddressValid ?? ''}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 ">
             <InputText
               name="country"
               value={formState.country}
               onChange={onInputChange}
               id="country"
               labelText="País"
+              supportText={formValidations.isCountryValid ?? ''}
             />
             <InputText
               name="city"
+              required
               value={formState.city}
               onChange={onInputChange}
               id="city"
               labelText="Ciudad"
+              supportText={formValidations.isCityValid ?? ''}
             />
           </div>
           <InputText
+            required
             name="phoneNumber"
             value={formState.phoneNumber}
             onChange={onInputChange}
             id="phone"
             labelText="Teléfono"
+            supportText={formValidations.isPhoneNumberValid ?? ''}
           />
         </div>
-        {/* <div
-          className="text-black bg-customOrange mt-8 rounded-lg px-8 pt-2 pb-5 cursor-pointer "
-          onClick={handleContinue}
-        >
-          <h3 className="text-md font-medium flex items-center justify-center  gap-3 mb-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-feather"
-              viewBox="0 0 16 16"
-            >
-              <path d="M15.807.531c-.174-.177-.41-.289-.64-.363a3.8 3.8 0 0 0-.833-.15c-.62-.049-1.394 0-2.252.175C10.365.545 8.264 1.415 6.315 3.1S3.147 6.824 2.557 8.523c-.294.847-.44 1.634-.429 2.268.005.316.05.62.154.88q.025.061.056.122A68 68 0 0 0 .08 15.198a.53.53 0 0 0 .157.72.504.504 0 0 0 .705-.16 68 68 0 0 1 2.158-3.26c.285.141.616.195.958.182.513-.02 1.098-.188 1.723-.49 1.25-.605 2.744-1.787 4.303-3.642l1.518-1.55a.53.53 0 0 0 0-.739l-.729-.744 1.311.209a.5.5 0 0 0 .443-.15l.663-.684c.663-.68 1.292-1.325 1.763-1.892.314-.378.585-.752.754-1.107.163-.345.278-.773.112-1.188a.5.5 0 0 0-.112-.172M3.733 11.62C5.385 9.374 7.24 7.215 9.309 5.394l1.21 1.234-1.171 1.196-.027.03c-1.5 1.789-2.891 2.867-3.977 3.393-.544.263-.99.378-1.324.39a1.3 1.3 0 0 1-.287-.018Zm6.769-7.22c1.31-1.028 2.7-1.914 4.172-2.6a7 7 0 0 1-.4.523c-.442.533-1.028 1.134-1.681 1.804l-.51.524zm3.346-3.357C9.594 3.147 6.045 6.8 3.149 10.678c.007-.464.121-1.086.37-1.806.533-1.535 1.65-3.415 3.455-4.976 1.807-1.561 3.746-2.36 5.31-2.68a8 8 0 0 1 1.564-.173" />
-            </svg>
-            Registrar firma
-          </h3>
-          <p className="font-light text-left mx-auto flex justify-center">
-            Guardá tu firma para firmar tus docmuentos de manera más rápida.
-          </p>
-        </div> */}
+
       </div>
 
-      <ReusableButton type="button" onClick={handleContinue}>Continuar</ReusableButton>
+      <ReusableButton  type="button" onClick={handleContinue}>Continuar</ReusableButton>
     </div>
   );
-};
+});

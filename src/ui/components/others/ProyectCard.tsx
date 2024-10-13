@@ -16,7 +16,7 @@ export const ProyectCard = ({ data, onClick }: ProyectCardProps) => {
       onClick={onClick}
     >
       <div className="flex justify-between items-center gap-2">
-        <IconBlueCircle />
+        <IconBlueCircle bgColor="bg-customOrange" />
 
         <div className="flex flex-col w-full ml-2">
           <h3 className="text-lg font-semibold">{data?.description}</h3>

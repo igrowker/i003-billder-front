@@ -19,10 +19,12 @@ export const InputText = ({
   hasErrors = false,
   fullWidth = true,
   supportText,
+  autoFocus = false,
 
   ...attributes
 }: InputProps) => {
-  const [isFocused, setIsFocused] = useState(false);
+  
+  const [isFocused, setIsFocused] = useState(autoFocus ?? false);
   const [canPasswordSee, setCanPasswordSee] = useState(false);
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -39,11 +41,12 @@ export const InputText = ({
   const handleBlur = () => {
     setIsFocused(false);
   };
-  useEffect(() => {
-    if (emailRef.current) {
-      emailRef.current.focus();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (emailRef.current) {
+  //     emailRef.current.focus();
+  //   }
+  // }, []);
+
 
   const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
   const outlinedBlackStyle = "focus:ring-2 focus:ring-orange/600";
@@ -51,6 +54,14 @@ export const InputText = ({
   const finalStyle =
     variant === InputStyles.Normal ? normalStyle : outlinedBlackStyle;
 
+  useEffect(() => {
+      if (passwordRef.current && passwordRef.current?.value.length > 0) {
+        handleFocus()
+      }
+      if (emailRef.current && emailRef.current.value.length > 0 ) {
+        handleFocus()
+      }
+  }, [emailRef, passwordRef])
   return (
     <div className="relative ">
       <label
@@ -74,6 +85,7 @@ export const InputText = ({
             <input
               ref={emailRef}
               autoComplete="off"
+              autoFocus={autoFocus} 
               onFocus={handleFocus}
               onBlur={e => {
                 if (e.target.value.length === 0) handleBlur();
@@ -117,6 +129,7 @@ export const InputText = ({
                flex`}
           >
             <input
+              autoFocus={autoFocus}
               ref={passwordRef}
               autoComplete="off"
               onFocus={handleFocus}
@@ -142,9 +155,8 @@ export const InputText = ({
         )}
       </label>
       <span
-        className={`${
-          hasErrors ? "text-red-500" : ""
-        } absolute top-[110%]  w-[calc(100%-4px)] text-xs select-none text-gray-600 left-1`}
+        className={`${hasErrors ? "text-red-500" : ""
+          } absolute top-[110%]  w-[calc(100%-4px)] text-xs select-none text-gray-600 left-1`}
       >
         {supportText}
       </span>

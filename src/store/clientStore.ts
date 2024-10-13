@@ -28,13 +28,18 @@ export const useClientStore = create<ClientStore>((set) => ({
         }
     },
     getClientById: async (id: number) => {
+        set({ isLoading: true })
+
         try {
             const { data } = await httpClient.get<Client>(`/Cliente/obtener-cliente/${id}`);
             return data
         }
         catch {
-            // const error = err as AxiosError;
             return null
+
+        }
+        finally {
+            set({ isLoading: false })
 
         }
     },

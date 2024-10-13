@@ -9,7 +9,8 @@ export type FormValidation<T> = {
     [key in keyof T]: [(value: T[key], formState: T) => boolean, string]
 }
 
-export type onInputChangeFunc = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, maxLenght?: number) => void
+export type onInputChangeFunc = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, numberInputType?: boolean, maxLenght?: number) => void;
+
 export const useForm = <T,>(initialState: T, formValidations: FormValidation<T>) => {
 
     const [formState, setFormState] = useState<T>(initialState);
@@ -22,14 +23,26 @@ export const useForm = <T,>(initialState: T, formValidations: FormValidation<T>)
 
     }, [formState]);
 
-    const onInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, maxLenght?: number) => {
+    const onInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, numberInputType?: boolean,maxLenght?: number) => {
         const { value, name } = e.target;
 
+        
         if (maxLenght && value.length <= maxLenght) {
             setFormState({
                 ...formState,
                 [name]: value
             })
+        };
+        if (numberInputType) {
+            const numbersRegex = /^[0-9]+$/;
+            if (!numbersRegex.test(value)) {
+                return;
+            }
+            setFormState({
+                ...formState,
+                [name]: value
+            })
+            return;
         };
 
         setFormState({ ...formState, [name]: value });

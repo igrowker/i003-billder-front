@@ -2,6 +2,7 @@ import { httpClient } from "@/api/axios.config";
 import { User } from "@/interfaces";
 import { UserLoginCredentials, UserRegisterCredentials } from "@/interfaces/request";
 import { getItemFromLocalStorage, removeItemFromLocalStorage, setItemToLocalStorage } from "@/utils/localstorage.util";
+import { AxiosError } from "axios";
 import { create } from "zustand";
 
 
@@ -15,7 +16,7 @@ export enum AuthStatus {
 interface AuthStore {
     user: { data: User | null, token: string | null };
     authStatus: AuthStatus,
-    registerUser: (credentials: UserRegisterCredentials) => Promise<ResponseBase>;
+    registerUser: (credentials: UserRegisterCredentials, navigate: (path: string) => void) => Promise<ResponseBase>;
     loginUser: (credentials: UserLoginCredentials) => Promise<ResponseBase>;
     logoutUser: () => void;
     checkToken: () => Promise<void>;
@@ -44,30 +45,33 @@ export const useAuthStore = create<AuthStore>(
                 }
             }
         },
-
-        registerUser: async (credentials) => {
-            set({ authStatus: AuthStatus.Checking })
+        
+        registerUser: async (credentials, navigate) => {
             try {
-
                 await httpClient.post("/Auth/register", credentials);
-                set({ authStatus: AuthStatus.NotAuthenticated })
+
+                
+                navigate('/auth/login')
 
                 return {
                     hasErrors: false,
                     message: 'Usuario registrado exitosamente'
                 };
             }
-            catch {
+            catch (err) {
+                const error = err as AxiosError
                 set({ authStatus: AuthStatus.NotAuthenticated })
+
                 return {
                     hasErrors: true,
-                    message: 'Error al registrar usuario'
+                    message: error.response?.data as string ?? error.message
                 }
             }
         },
         checkToken: async () => {
+            set({authStatus: AuthStatus.Checking})
             const token = getItemFromLocalStorage(import.meta.env.VITE_AUTH_KEY) as string | null;
-            const logoutUser  = get().logoutUser;
+            const logoutUser = get().logoutUser;
             try {
                 if (token === null || token === '' || token.length < 10) throw new Error('Token no encontrado');
                 const { data } = await httpClient.get<User>('Auth/obtener-informacion-usuario');
@@ -79,8 +83,8 @@ export const useAuthStore = create<AuthStore>(
                     authStatus: AuthStatus.Authenticated
                 })
             }
-            catch  {
-                
+            catch {
+
 
                 logoutUser();
             }

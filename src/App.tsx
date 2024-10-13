@@ -13,20 +13,35 @@ export const App = React.memo(() => {
 
   useEffect(() => {
     checkToken();
-    setTimeout(() => {
+  }, []);
+
+  useEffect(() => {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
       setLoading(false);
-    }, 2000);
+    }
+    else {
+      const handleDOMContentLoaded = () => {
+        setLoading(false);
+      };
+
+      document.addEventListener("DOMContentLoaded", handleDOMContentLoaded);
+
+      return () => {
+        document.removeEventListener("DOMContentLoaded", handleDOMContentLoaded);
+      };
+    }
   }, []);
 
   return (
     <div className="max-w-[800px]  mx-auto">
-      {loading ? (
-        <SplashScreen />
-      ) : (
-        <AlertsProvider>
-          <AppRouter />
-        </AlertsProvider>
-      )}
+      {
+        loading ? (
+          <SplashScreen />
+        ) : (
+          <AlertsProvider>
+            <AppRouter />
+          </AlertsProvider>
+        )}
     </div>
   );
 });

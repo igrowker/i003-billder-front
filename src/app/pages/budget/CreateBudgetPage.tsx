@@ -38,8 +38,7 @@ export const CreateBudgetPage = () => {
 
   useEffect(() => {
     const fetchProject = async () => {
-      const res = await getProjectById(Number(projectId));
-      setProject(res);
+      await getProjectById(Number(projectId), (project) => setProject(project));
     };
 
     fetchProject();

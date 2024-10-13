@@ -37,7 +37,7 @@ export const AppRoutes = () => {
         <Route path="/client/:clientId/" element={<ClientInfoPage />} />
 
         {/* Rutas de presupuestos */}
-        <Route path="new-budget/:projectId" element={<CreateBudgetPage />} />
+        <Route path="/client/:clientId/project/:projectId/new-budget/" element={<CreateBudgetPage />} /> 
 
         {/* Ruta de perfil */}
         <Route path="profile" element={<ProfilePage />} />

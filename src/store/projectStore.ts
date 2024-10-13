@@ -31,7 +31,7 @@ export const useProjectStore = create<ProjectStore>(set => ({
     getProjectById: async (id, setState) => {
         try {
             const project = await httpClient.get<Project>(
-                `Trabajo/obtener-job/${id}`
+                `/Trabajo/obtener-trabajo/${id}`
             );
             setState(project.data);
             return project.data;

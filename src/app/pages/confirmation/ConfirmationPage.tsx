@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const ConfirmationPage = () => {
   const navigate = useNavigate();
   const handleFinalize = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -15,4 +15,3 @@ export const ConfirmationPage = () => {
     />
   );
 };
-

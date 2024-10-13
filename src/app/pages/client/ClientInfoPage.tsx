@@ -1,6 +1,5 @@
 import { IconBlueCircle, NotDataCreated } from "@/app/components";
 import { PersonIcon, WhatsappIcon } from "@/assets/icons";
-import { AddIcon } from "@/assets/icons/AddIcon";
 import { Client } from "@/interfaces/client.interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useClientStore } from "@/store/clientStore";

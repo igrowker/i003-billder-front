@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AddCircleIcon } from "@/assets/icons";
 import { InputText } from "@/ui/components";
 
@@ -18,10 +18,23 @@ export const BudgetCalcTab = ({ onItemsChange }: BudgetCalcTabProps) => {
   const [quantity, setQuantity] = useState("");
   const [precio, setPrecio] = useState("");
 
+  const nombreInputContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (nombreInputContainerRef.current) {
+      // Buscamos el input dentro del contenedor usando querySelector
+      const nombreInput =
+        nombreInputContainerRef.current.querySelector("input#nombre");
+      if (nombreInput) {
+        (nombreInput as HTMLInputElement).focus(); // Hacemos foco en el input
+      }
+    }
+  }, []);
+
   useEffect(() => {
     onItemsChange(items);
   }, [items, onItemsChange]);
-  
+
   const handleAddItem = () => {
     if (nombre && quantity && precio) {
       const newItem: Item = {
@@ -50,14 +63,14 @@ export const BudgetCalcTab = ({ onItemsChange }: BudgetCalcTabProps) => {
   };
 
   return (
-    <div className="mt-6 flex flex-col gap-9">
+    <div className="mt-6 flex flex-col gap-9" >
       <p className="text-gray-400">
         Para calcular tu trabajo, ingresá el nombre del trabajo (material, días,
         metros, horas), la cantidad y el precio unitario. También podés añadir
         otros gastos adicionales.
       </p>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6" ref={nombreInputContainerRef}>
         <InputText
           labelText="Nombre"
           type="text"

@@ -1,5 +1,5 @@
 import { UserCircleIcon, BellIcon, PersonAddIcon } from "@/assets/icons";
-import { ActionCard, IngresosPendientes, SearchInput } from "@/ui/components/";
+import { ActionCard, IngresosPendientes, /* SearchInput */ } from "@/ui/components/";
 import { useNavigate } from "react-router-dom";
 import { NotDataCreated } from "@/app/components";
 import React, { useEffect } from "react";
@@ -49,7 +49,7 @@ export const HomePage = React.memo(() => {
       </header>
       <IngresosPendientes />
 
-      <SearchInput />
+      {/* <SearchInput /> */}
 
       <div className="flex justify-between flex-grow mb-8">
         <ActionCard

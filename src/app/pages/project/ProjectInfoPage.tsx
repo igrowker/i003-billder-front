@@ -35,27 +35,28 @@ export const ProjectInfoPage = () => {
 
   return (
     <ReturnLayout
-      backgroundColor="bg-customOrange"
       returnFunction={() => navigate(-1)}
       title="Proyecto"
       paddingContent={false}
     >
-      <div className="bg-customOrange p-4 gap-4 flex min-h-[200px]">
-        <IconBlueCircle />
+      <div className=" p-4 gap-4 flex ">
+        <IconBlueCircle bgColor="bg-customOrange" />
         <div>{project?.description}</div>
       </div>
-      <div className=" -translate-y-1/2 -translate-x-1/2 relative left-1/2">
+      <div className=" -translate-x-1/2 relative left-1/2">
         <PayInfoCard />
       </div>
 
       <div className="p-6">
         <h4 className="font-medium text-2xl mb-2">Documentos</h4>
         <div className="grid-cols-1 gap-2 grid">
-          {draft.length === 0 ? (
-            <NotDataCreated text="Aún no creaste documentos" />
-          ) : (
-            draft.map((d, i) => <DocumentItem key={i} {...d} />)
-          )}
+          {
+            draft.length === 0 ? (
+              <NotDataCreated text="Aún no creaste documentos" />
+            ) : (
+              draft.map((d, i) => <DocumentItem key={i} {...d} />)
+            )
+          }
         </div>
         {/* <NotDataCreated  text="Aún no creaste documentos" /> */}
       </div>

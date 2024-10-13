@@ -41,7 +41,7 @@ export const PersonalDataTab = ({ handleContinue, formState, onInputChange }: Pe
             id="adress"
             labelText="Dirección"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-y-5 sm:grid-cols-2 gap-4">
             <InputText
               name="country"
               value={formState.country}

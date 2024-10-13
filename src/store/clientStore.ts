@@ -35,7 +35,6 @@ export const useClientStore = create<ClientStore>((set) => ({
             return data
         }
         catch {
-            // const error = err as AxiosError;
             return null
 
         }

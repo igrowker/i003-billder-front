@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useContext, useState, useTransition } from "react";
 import {
   // RegisterSignatureTab,
   AccountDataTab,
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { FormValidation, useForm } from "@/hooks/useForm";
 import { UserRegisterCredentials } from "@/interfaces/request";
 import { useAuthStore } from "@/store/authStore";
+import { AlertsContext } from "@/context/AlertsContext";
 
 enum RegisterTabs {
   Initial = 1,
@@ -36,7 +37,12 @@ const formValidations: FormValidation<UserRegisterCredentials> = {
   fullName: [() => false, ""],
   phoneNumber: [() => false, ""],
   email: [(value) => value.length > 0 && !value.includes('@'), "El email debe incluir una @"],
-  password: [() => false, ""],
+  password: [
+    (value) => {
+      const regExp = / d/
+    }, 
+    ""
+  ],
   repeatPassword: [(value, formState) => value !== formState.password, "Las contraseñas no coinciden"]
 }
 
@@ -46,7 +52,8 @@ export const RegisterPage = () => {
   const registerUser = useAuthStore((state) => state.registerUser);
   const [isPending, startTransition] = useTransition();
   const [tab, setTab] = useState(RegisterTabs.Initial);
-  const { formState, formValidation, onInputChange } = useForm(formInitialState, formValidations)
+  const { formState, formValidation, onInputChange, isFormValid } = useForm(formInitialState, formValidations)
+  const { newAlert } = useContext(AlertsContext);
 
   const handleNextTab = () => {
     const nextTab = tab == RegisterTabs.EndTab ? null : tab + 1;
@@ -64,12 +71,18 @@ export const RegisterPage = () => {
   };
 
 
-
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isFormValid === false) return;
+    const { hasErrors, message } = await registerUser(formState);
+    if (hasErrors == true) {
+      newAlert({
+        type: 'error',
+        message: message
+      });
+      return;
+    };
     navigate('/auth/login')
-    const { hasErrors } = await registerUser(formState);
-    if (hasErrors) return navigate('/auth/register');
   };
 
   return (
@@ -78,26 +91,30 @@ export const RegisterPage = () => {
       returnFunction={handleReturnTab}
       title="Registrate"
     >
-      <form action="" onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit}>
 
-        {tab === RegisterTabs.Initial && (
-          <PersonalDataTab
-            formValidations={formValidation}
-            formState={formState}
-            onInputChange={onInputChange}
-            handleContinue={handleNextTab}
-          />
-        )}
+        {
+          tab === RegisterTabs.Initial && (
+            <PersonalDataTab
+              formValidations={formValidation}
+              formState={formState}
+              onInputChange={onInputChange}
+              handleContinue={handleNextTab}
+            />
+          )
+        }
         {/* {tab === RegisterTabs.SignatureTab && (
           <RegisterSignatureTab handleContinue={handleNextTab} />
         )} */}
-        {tab === RegisterTabs.EndTab && (
-          <AccountDataTab
-            formValidations={formValidation}
-            formState={formState}
-            onInputChange={onInputChange}
-          />
-        )}
+        {
+          tab === RegisterTabs.EndTab && (
+            <AccountDataTab
+              formValidations={formValidation}
+              formState={formState}
+              onInputChange={onInputChange}
+            />
+          )
+        }
       </form>
     </ReturnLayout>
   );

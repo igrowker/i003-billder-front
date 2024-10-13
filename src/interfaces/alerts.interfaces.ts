@@ -6,7 +6,7 @@ export interface IAlert {
     type: IAlertType;
 }
 export interface IAlertCreate extends IAlert {
-    id: number;
+    id: string;
 }
 export type IAlertType = 'warning' | 'success' | 'info' | 'error';
 

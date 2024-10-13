@@ -1,5 +1,5 @@
 import { UserCircleIcon, BellIcon, PersonAddIcon } from "@/assets/icons";
-import { ActionCard, IngresosPendientes, /* SearchInput */ } from "@/ui/components/";
+import { ActionCard, ClientInfoSkeletonCard, IngresosPendientes, /* SearchInput */ } from "@/ui/components/";
 import { useNavigate } from "react-router-dom";
 import { NotDataCreated } from "@/app/components";
 import React, { useEffect } from "react";
@@ -10,10 +10,11 @@ import { useAuthStore } from "@/store/authStore";
 
 export const HomePage = React.memo(() => {
   const navigate = useNavigate();
-  const { getClients, clients } = useClientStore(
+  const { getClients, clients, isClientsLoading } = useClientStore(
     useShallow(state => ({
       getClients: state.getClients,
       clients: state.clients,
+      isClientsLoading: state.isLoading
     }))
   );
   const user = useAuthStore(state => state.user);
@@ -62,18 +63,21 @@ export const HomePage = React.memo(() => {
 
       <div className="">
         <h2 className="font-medium text-2xl mb-2">Mis clientes</h2>
-        {clients.length > 0 ? (
-          clients.map(client => (
-            <ClientCard
-              onClick={() => navigate(`client/${client.id}`)}
-              client={client}
-              key={client.id}
-            />
-          ))
-        ) : (
-          // Si no hay proyectos, muestra un mensaje
-          <NotDataCreated text="Aún no tenés ningun cliente" />
-        )}
+        {
+          (isClientsLoading)
+            ? [1, 2].map(() => <ClientInfoSkeletonCard />)
+            : (clients.length > 0)
+              ? (
+                clients.map(client => (
+                  <ClientCard
+                    onClick={() => navigate(`client/${client.id}`)}
+                    client={client}
+                    key={client.id}
+                  />
+                ))
+              )
+              : <NotDataCreated text="Aún no tenés ningun cliente" />
+        }
       </div>
     </div>
   );

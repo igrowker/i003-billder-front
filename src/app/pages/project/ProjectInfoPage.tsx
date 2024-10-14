@@ -1,24 +1,25 @@
 import { NotDataCreated, PayInfoCard, IconBlueCircle } from "@/app/components";
-import { DocumentItem, DocumentItemProps } from "@/app/components/DocumentItem";
+import { DocumentItem } from "@/app/components/DocumentItem";
 import { AddIcon } from "@/assets/icons/AddIcon";
 import { Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
+import { useBudgetStore } from "@/store/budgetStore";
 import { useProjectStore } from "@/store/projectStore";
 import { ClientInfoSkeletonCard, FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
 import { formaDate } from "@/utils/date.util";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useShallow } from "zustand/shallow";
 
 export const ProjectInfoPage = () => {
-  const draft = [
-    { title: "Presupuesto", status: 1 },
-    { title: "Acuerdo de obra", status: 2 },
-    { title: "Materiales", status: 3 },
-  ] as DocumentItemProps[];
 
   const navigate = useNavigate();
   const { projectId } = useParams();
   const getProjectById = useProjectStore(state => state.getProjectById);
+  const { budgets, getBudgets } = useBudgetStore(useShallow(state => ({
+    budgets: state.budgets,
+    getBudgets: state.getBudgets
+  })));
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [project, setProject] = useState<Project>();
@@ -26,6 +27,7 @@ export const ProjectInfoPage = () => {
   const getProject = async () => {
     setIsLoading(true);
     const project = await getProjectById(Number(projectId), (project) => setProject(project));
+    await getBudgets(Number(projectId))
     setIsLoading(false)
     if (project === null) return;
 
@@ -39,10 +41,10 @@ export const ProjectInfoPage = () => {
     navigateReact('/' + urls.slice(0, urls.length - 2).join('/'))
 
   }
-
-
+  
   useEffect(() => {
     getProject();
+    
   }, [projectId]);
 
   return (
@@ -60,7 +62,7 @@ export const ProjectInfoPage = () => {
               <>
                 <IconBlueCircle bgColor="bg-customOrange" />
                 <div>
-                  <h3 className="font-medium ">{project?.description}</h3>
+                  <h3 className="font-medium ">Descripcion: {project?.description}</h3>
                   <h3 className="font-medium ">Fecha: <span className="font-normal">{formaDate(project?.fecha as string)}</span></h3>
 
                 </div>
@@ -77,11 +79,11 @@ export const ProjectInfoPage = () => {
         <h4 className="font-medium text-2xl mb-2">Documentos</h4>
         <div className="grid-cols-1 gap-2 grid">
           {
-            (draft.length === 0)
+            (budgets.length === 0)
               ? (
                 <NotDataCreated text="Aún no creaste documentos" />
               ) : (
-                draft.map((d, i) => <DocumentItem key={i} {...d} />)
+                budgets.map((d, i) => <DocumentItem key={i} title="Presupuesto" status={1} />)
               )
           }
         </div>

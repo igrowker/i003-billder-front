@@ -5,6 +5,7 @@ import { AlertsProvider } from "./context/AlertsProvider";
 import { useAuthStore } from "./store/authStore";
 import { SplashScreen } from "./ui/components";
 
+
 export const App = React.memo(() => {
   useConfigureInterceptors();
 

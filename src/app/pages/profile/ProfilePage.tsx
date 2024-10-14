@@ -58,7 +58,7 @@ export const ProfilePage = () => {
             <InputText
               id="fullName"
               disabled={!isEditing}
-              labelText=""
+              labelText="Nombre completo"
               placeholder="Nombre completo"
               defaultValue={formData.fullName}
               onChange={handleInputChange}
@@ -66,7 +66,7 @@ export const ProfilePage = () => {
             <InputText
               id="dni"
               disabled={!isEditing}
-              labelText=""
+              labelText="DNI"
               placeholder="Tu DNI"
               defaultValue={formData.dni}
               onChange={handleInputChange}
@@ -74,7 +74,7 @@ export const ProfilePage = () => {
             <InputText
               id="address"
               disabled={!isEditing}
-              labelText=""
+              labelText="Dirección"
               placeholder="Dirección"
               defaultValue={formData.address}
               onChange={handleInputChange}
@@ -83,7 +83,7 @@ export const ProfilePage = () => {
               <InputText
                 id="country"
                 disabled={!isEditing}
-                labelText=""
+                labelText="País"
                 placeholder="Argentina"
                 defaultValue={formData.country}
                 onChange={handleInputChange}
@@ -91,7 +91,7 @@ export const ProfilePage = () => {
               <InputText
                 id="city"
                 disabled={!isEditing}
-                labelText=""
+                labelText="Ciudad"
                 placeholder="Quilmes"
                 defaultValue={formData.city}
                 onChange={handleInputChange}
@@ -100,7 +100,7 @@ export const ProfilePage = () => {
             <InputText
               id="phoneNumber"
               disabled={!isEditing}
-              labelText=""
+              labelText="Telefono"
               placeholder="Teléfono"
               defaultValue={formData.phoneNumber}
               onChange={handleInputChange}

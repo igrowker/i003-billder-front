@@ -4,9 +4,10 @@ import { AddIcon } from "@/assets/icons/AddIcon";
 import { Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useProjectStore } from "@/store/projectStore";
-import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
+import { ClientInfoSkeletonCard, FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
+import { formaDate } from "@/utils/date.util";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export const ProjectInfoPage = () => {
   const draft = [
@@ -24,11 +25,21 @@ export const ProjectInfoPage = () => {
 
   const getProject = async () => {
     setIsLoading(true);
-    const project = await getProjectById(Number(projectId), (project) => setProject(project) );
+    const project = await getProjectById(Number(projectId), (project) => setProject(project));
     setIsLoading(false)
     if (project === null) return;
 
   };
+
+  const locationReact = useLocation();
+  const navigateReact = useNavigate();
+
+  const goLast = () => {
+    const urls = locationReact.pathname.split('/').filter(state => state !== '');
+    navigateReact('/' + urls.slice(0, urls.length - 2).join('/'))
+
+  }
+
 
   useEffect(() => {
     getProject();
@@ -36,13 +47,27 @@ export const ProjectInfoPage = () => {
 
   return (
     <ReturnLayout
-      returnFunction={() => navigate(-1)}
+      returnFunction={goLast}
       title="Proyecto"
       paddingContent={false}
     >
-      <div className=" p-4 gap-4 flex ">
-        <IconBlueCircle bgColor="bg-customOrange" />
-        <div>{project?.description}</div>
+
+      <div className=" p-4 gap-4 flex  min-h-[115px]">
+        {
+          (isLoading)
+            ? <ClientInfoSkeletonCard />
+            : (
+              <>
+                <IconBlueCircle bgColor="bg-customOrange" />
+                <div>
+                  <h3 className="font-medium ">{project?.description}</h3>
+                  <h3 className="font-medium ">Fecha: <span className="font-normal">{formaDate(project?.fecha as string)}</span></h3>
+
+                </div>
+              </>
+            )
+
+        }
       </div>
       <div className=" -translate-x-1/2 relative left-1/2">
         <PayInfoCard />
@@ -52,12 +77,12 @@ export const ProjectInfoPage = () => {
         <h4 className="font-medium text-2xl mb-2">Documentos</h4>
         <div className="grid-cols-1 gap-2 grid">
           {
-            (draft.length === 0) 
-            ? (
-              <NotDataCreated text="Aún no creaste documentos" />
-            ) : (
-              draft.map((d, i) => <DocumentItem key={i} {...d} />)
-            )
+            (draft.length === 0)
+              ? (
+                <NotDataCreated text="Aún no creaste documentos" />
+              ) : (
+                draft.map((d, i) => <DocumentItem key={i} {...d} />)
+              )
           }
         </div>
       </div>

@@ -54,7 +54,7 @@ export const ClientInfoPage = () => {
             }}
             paddingContent={false}
         >
-            <div className="bg-customOrange p-4 gap-4 flex shadow-sm">
+            <div className="bg-customOrange p-4 gap-4 flex shadow-sm transition-all">
                 {
                     isLoading
                         ? <ClientInfoSkeletonCard />
@@ -93,18 +93,18 @@ export const ClientInfoPage = () => {
 
             <div className="p-6">
                 <h4 className="font-medium text-2xl mb-2">Trabajos</h4>
-                <div className="grid-cols-1  grid gap-4">
+                <div className="grid-cols-1  grid ">
                     {
                         (isProjectsLoading)
-                            ? [1, 2].map(() => <ProjectInfoSkeletonCard />)
+                            ? [1, 2].map((_, i) => <ProjectInfoSkeletonCard key={i+_} />)
                             : (projects.length === 0)
                                 ? (
                                     <NotDataCreated text="Aún no tienes proyectos" />
                                 )
                                 : (
-                                    projects.map((project, i) => (
+                                    projects.map((project) => (
                                         <ProyectCard
-                                            key={i}
+                                            key={project.id}
                                             data={project}
                                             onClick={() => navigate(`project/${project.id}`)}
                                         />

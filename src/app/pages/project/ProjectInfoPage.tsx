@@ -4,7 +4,7 @@ import { AddIcon } from "@/assets/icons/AddIcon";
 import { Project } from "@/interfaces";
 import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useProjectStore } from "@/store/projectStore";
-import { FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
+import { ClientInfoSkeletonCard, FlotatingButton, Modal, ReusableButton } from "@/ui/components/";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export const ProjectInfoPage = () => {
 
   const getProject = async () => {
     setIsLoading(true);
-    const project = await getProjectById(Number(projectId), (project) => setProject(project) );
+    const project = await getProjectById(Number(projectId), (project) => setProject(project));
     setIsLoading(false)
     if (project === null) return;
 
@@ -40,10 +40,17 @@ export const ProjectInfoPage = () => {
       title="Proyecto"
       paddingContent={false}
     >
-      <div className=" p-4 gap-4 flex ">
-        <IconBlueCircle bgColor="bg-customOrange" />
-        <div>{project?.description}</div>
-      </div>
+      {
+        (isLoading)
+          ? <ClientInfoSkeletonCard />
+          : (
+          <div className=" p-4 gap-4 flex ">
+            <IconBlueCircle bgColor="bg-customOrange" />
+            <div>{project?.description}</div>
+          </div>
+          )
+
+      }
       <div className=" -translate-x-1/2 relative left-1/2">
         <PayInfoCard />
       </div>
@@ -52,20 +59,20 @@ export const ProjectInfoPage = () => {
         <h4 className="font-medium text-2xl mb-2">Documentos</h4>
         <div className="grid-cols-1 gap-2 grid">
           {
-            (draft.length === 0) 
-            ? (
-              <NotDataCreated text="Aún no creaste documentos" />
-            ) : (
-              draft.map((d, i) => <DocumentItem key={i} {...d} />)
-            )
+            (draft.length === 0)
+              ? (
+                <NotDataCreated text="Aún no creaste documentos" />
+              ) : (
+                draft.map((d, i) => <DocumentItem key={i} {...d} />)
+              )
           }
         </div>
       </div>
-      <div className="p-6">
+      {/* <div className="p-6">
         <h4 className="font-medium text-2xl mb-2">Borradores</h4>
 
         <NotDataCreated text="No hay documentos en curso" />
-      </div>
+      </div> */}
       <FlotatingButton className="w-14 h-14" circle onClick={() => setIsOpen(true)}>
         <AddIcon />
       </FlotatingButton>

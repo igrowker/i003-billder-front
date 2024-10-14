@@ -25,7 +25,6 @@ export const LoginPage = () => {
   const loginUser = useAuthStore((state) => state.loginUser);
   const { newAlert } = useContext(AlertsContext);
 
-
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { hasErrors, message } = await loginUser(formState)
@@ -40,9 +39,10 @@ export const LoginPage = () => {
     newAlert({
       type: 'success',
       message: message
-    })
+    });
+    
   };
-
+  
   return (
     <div className="h-dvh w-full  bg-customOrange">
       <div className=" h-[32%] grid place-content-center">
@@ -83,9 +83,9 @@ export const LoginPage = () => {
               required
             />
           </div>
-          <p className="underline text-end cursor-pointer ">
+          {/* <p className="underline text-end cursor-pointer ">
             Olvidé mi contraseña
-          </p>
+          </p> */}
           <div className="mt-2 flex flex-col gap-4">
             <ReusableButton type="submit">Iniciar sesión</ReusableButton>
             <OutlineButton type="button" onClick={() => navigate("/auth/register")}>

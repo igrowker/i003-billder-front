@@ -23,7 +23,7 @@ export const InputText = ({
 
   ...attributes
 }: InputProps) => {
-  
+
   const [isFocused, setIsFocused] = useState(autoFocus ?? false);
   const [canPasswordSee, setCanPasswordSee] = useState(false);
 
@@ -48,20 +48,21 @@ export const InputText = ({
   // }, []);
 
 
-  const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
+  const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 disabled:border-0 `;
   const outlinedBlackStyle = "focus:ring-2 focus:ring-orange/600";
 
   const finalStyle =
     variant === InputStyles.Normal ? normalStyle : outlinedBlackStyle;
 
   useEffect(() => {
-      if (passwordRef.current && passwordRef.current?.value.length > 0) {
-        handleFocus()
-      }
-      if (emailRef.current && emailRef.current.value.length > 0 ) {
-        handleFocus()
-      }
+    if (passwordRef.current && passwordRef.current?.value.length > 0) {
+      handleFocus()
+    }
+    if (emailRef.current && emailRef.current.value.length > 0) {
+      handleFocus()
+    }
   }, [emailRef, passwordRef])
+
   return (
     <div className="relative ">
       <label
@@ -73,9 +74,14 @@ export const InputText = ({
             top: isFocused ? "0px" : "50%",
             fontSize: isFocused ? "14px" : "16px",
             paddingInline: isFocused ? "8px" : 0,
-            backgroundColor: isFocused ? "white" : "",
+            backgroundColor: (attributes.disabled === undefined) ? 'white' : '',
           }}
-          className={` z-10 transition-all ease-in-out duration-100 pointer-events-none absolute text-gray-500 top-1/2  left-2 -translate-y-1/2`}
+          className={`
+            ${(attributes.disabled !== undefined && attributes?.disabled === false)
+              ? 'bg-white'
+              : 'bg-slate-200 rounded-sm'
+            } 
+                w-max z-10 transition-all ease-in-out duration-100 pointer-events-none absolute text-gray-500 top-1/2  left-2 -translate-y-1/2`}
         >
           {labelText}
         </span>
@@ -85,7 +91,7 @@ export const InputText = ({
             <input
               ref={emailRef}
               autoComplete="off"
-              autoFocus={autoFocus} 
+              autoFocus={autoFocus}
               onFocus={handleFocus}
               onBlur={e => {
                 if (e.target.value.length === 0) handleBlur();

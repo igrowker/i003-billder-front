@@ -93,10 +93,14 @@ export const ClientInfoPage = () => {
 
             <div className="p-6">
                 <h4 className="font-medium text-2xl mb-2">Trabajos</h4>
-                <div className="grid-cols-1  grid gap-4">
+                <div className={`grid-cols-1 `}>
                     {
                         (isProjectsLoading)
-                            ? [1, 2].map(() => <ProjectInfoSkeletonCard />)
+                            ? [1, 2].map((_,i ) => (
+                                <div className="mt-4" key={i} >
+                                    <ProjectInfoSkeletonCard />
+                                </div>
+                            ))
                             : (projects.length === 0)
                                 ? (
                                     <NotDataCreated text="Aún no tienes proyectos" />

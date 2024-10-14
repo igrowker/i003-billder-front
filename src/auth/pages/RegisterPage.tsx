@@ -38,7 +38,7 @@ const formValidations: FormValidation<UserRegisterCredentials> = {
 	fullName: [(value)  => value.length <= 0, "Este campo no puede ser vacio"], 
 	phoneNumber: [(value) => value.length < 3, "El teléfono tiene que tener mas de 3 caracteres"],
 	email: [(value) => value.length > 0 && !value.includes('@'), "El email debe incluir una @"],
-	password: [(value) => value.length < 8 && value.includes(' '), "La contraseña debe tener al menos 8 caracteres y no debe contener espacios"],
+	password: [(value) => value.length < 8 || value.includes(' '), "La contraseña debe tener al menos 8 caracteres y no debe contener espacios"],
 	repeatPassword: [(value, formState) => value !== formState.password, "Las contraseñas no coinciden"]
 }
 

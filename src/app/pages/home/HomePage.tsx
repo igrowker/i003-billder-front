@@ -65,7 +65,7 @@ export const HomePage = React.memo(() => {
         <h2 className="font-medium text-2xl mb-2">Mis clientes</h2>
         {
           (isClientsLoading)
-            ? [1, 2].map(() => <ClientInfoSkeletonCard />)
+            ? [1, 2].map((_, i) => <ClientInfoSkeletonCard key={i} />)
             : (clients.length > 0)
               ? (
                 clients.map(client => (

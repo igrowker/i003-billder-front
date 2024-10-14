@@ -54,7 +54,7 @@ export const ClientInfoPage = () => {
             }}
             paddingContent={false}
         >
-            <div className="bg-customOrange p-4 gap-4 flex shadow-sm">
+            <div className="bg-customOrange p-4 gap-4 flex shadow-sm transition-all">
                 {
                     isLoading
                         ? <ClientInfoSkeletonCard />
@@ -91,7 +91,7 @@ export const ClientInfoPage = () => {
                 }
             </div>
 
-            <div className="p-6">
+          <div className="p-6">
                 <h4 className="font-medium text-2xl mb-2">Trabajos</h4>
                 <div className={`grid-cols-1 `}>
                     {

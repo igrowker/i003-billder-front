@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { EnumAlertTypes, IAlertType } from '@/interfaces/';
 import { CheckIcon, ExclamationTriangleIcon, InformationCircleIcon } from "@/assets/icons";
 import { WarningIcon } from "@/assets/icons/WarningIcon";
@@ -34,13 +34,17 @@ export const FlotatingAlert = ({ message, type }: FlotatingAlertProps) => {
                         : ( type == EnumAlertTypes.Error ) ? <ExclamationTriangleIcon/>
                         : ( type == EnumAlertTypes.Info) ? <InformationCircleIcon/>
                         : <WarningIcon/>
+
+    const [isOpen, setIsOpen] = useState(true);
+    if ( isOpen === false ) return null;
     return (
-        <div className={`fadeInUp px-3 py-2  rounded-md shadow-md flex gap-3 items-center ${setPriorityClasses(type)} `} >
+        <div className={`fadeInUp px-3 py-2 justify-between rounded-md shadow-md flex gap-3 items-center ${setPriorityClasses(type)} `} >
             <div className="w-5 h-5">
                 { finallyIcon }
 
             </div>
             <p className="whitespace-pre-line">{message}</p>
+            <button className="" onClick={() => setIsOpen(false)}>X</button>
         </div>
     )
 }

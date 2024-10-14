@@ -74,7 +74,7 @@ export const PersonalDataTab = React.memo(({ handleContinue, formState, onInputC
             required
             name="phoneNumber"
             value={formState.phoneNumber}
-            onChange={onInputChange}
+            onChange={(e) => onInputChange(e, true)}
             id="phone"
             labelText="Teléfono"
             supportText={formValidations.isPhoneNumberValid ?? ''}

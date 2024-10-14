@@ -20,6 +20,7 @@ interface AuthStore {
     loginUser: (credentials: UserLoginCredentials) => Promise<ResponseBase>;
     logoutUser: () => void;
     checkToken: () => Promise<void>;
+    editProfile: (credentials: Partial<User>) => Promise<ResponseBase>
 }
 
 interface ResponseBase { hasErrors: boolean; message: string }
@@ -45,12 +46,35 @@ export const useAuthStore = create<AuthStore>(
                 }
             }
         },
-        
+        editProfile: async (credentials) => {
+            try {
+                const { data } = await httpClient.put<User>('/Auth/modificar-informacion-usuario', credentials)
+                set((prev) => ({
+                    user: {
+                        data: data,
+                        token: prev.user.token
+                    }
+                }))
+                return {
+                    hasErrors: false,
+                    message: '¡Perfil editado correctamente!'
+                }
+
+            }
+            catch (error) {
+                const err = error as AxiosError
+                return {
+                    hasErrors: true,
+                    message: err.response?.data as string ?? err.message as string
+                }
+            }
+        },
+
         registerUser: async (credentials, navigate) => {
             try {
                 await httpClient.post("/Auth/register", credentials);
 
-                
+
                 navigate('/auth/login')
 
                 return {
@@ -69,7 +93,7 @@ export const useAuthStore = create<AuthStore>(
             }
         },
         checkToken: async () => {
-            set({authStatus: AuthStatus.Checking})
+            set({ authStatus: AuthStatus.Checking })
             const token = getItemFromLocalStorage(import.meta.env.VITE_AUTH_KEY) as string | null;
             const logoutUser = get().logoutUser;
             try {

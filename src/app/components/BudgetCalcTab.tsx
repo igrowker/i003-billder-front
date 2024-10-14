@@ -81,18 +81,18 @@ export const BudgetCalcTab = ({ onItemsChange }: BudgetCalcTabProps) => {
         />
         <div className="grid grid-cols-2 gap-4">
           <InputText
-            labelText="Precio"
-            type="number"
-            id="precio"
-            value={precio}
-            onChange={e => setPrecio(e.target.value)}
-          />
-          <InputText
             labelText="Cantidad"
             type="number"
             id="quantity"
             value={quantity}
             onChange={e => setQuantity(e.target.value)}
+          />
+          <InputText
+            labelText="Precio"
+            type="number"
+            id="precio"
+            value={precio}
+            onChange={e => setPrecio(e.target.value)}
           />
         </div>
       </div>

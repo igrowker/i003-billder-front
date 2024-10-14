@@ -1,18 +1,11 @@
-import { ReturnLayout } from "@/layouts/ReturnLayout";
+import { BasicLayout } from "@/layouts/BasicLayout";
 import { Dropdown } from "@/ui/components/dropdown";
-import { useNavigate } from "react-router-dom";
 
 export const HelpPage = () => {
-  const navigate = useNavigate();
   return (
-    <ReturnLayout
-      canEdit={{
-        isEditing: true,
-        onClick() {},
-      }}
+    <BasicLayout
       title="Ayuda"
       paddingContent={true}
-      returnFunction={() => navigate(-1)}
     >
       <div>
         <h2 className="text-xl font-semibold px-6 py-4">
@@ -90,6 +83,6 @@ export const HelpPage = () => {
           }}
         />
       </div>
-    </ReturnLayout>
+    </BasicLayout>
   );
 };

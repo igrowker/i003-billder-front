@@ -91,20 +91,24 @@ export const ClientInfoPage = () => {
                 }
             </div>
 
-            <div className="p-6">
+          <div className="p-6">
                 <h4 className="font-medium text-2xl mb-2">Trabajos</h4>
-                <div className="grid-cols-1  grid ">
+                <div className={`grid-cols-1 `}>
                     {
                         (isProjectsLoading)
-                            ? [1, 2].map((_, i) => <ProjectInfoSkeletonCard key={i+_} />)
+                            ? [1, 2].map((_,i ) => (
+                                <div className="mt-4" key={i} >
+                                    <ProjectInfoSkeletonCard />
+                                </div>
+                            ))
                             : (projects.length === 0)
                                 ? (
                                     <NotDataCreated text="Aún no tienes proyectos" />
                                 )
                                 : (
-                                    projects.map((project) => (
+                                    projects.map((project, i) => (
                                         <ProyectCard
-                                            key={project.id}
+                                            key={i}
                                             data={project}
                                             onClick={() => navigate(`project/${project.id}`)}
                                         />

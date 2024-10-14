@@ -45,21 +45,8 @@ export const HelpPage = () => {
           content={{
             subtitle:
               "Dentro del proyecto podés generar dos tipos de documentos",
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis dictum ipsum. Praesent eu augue ac augue luctus ultrices non at risus. Duis ac placerat elit. Quisque dui odio, mollis a blandit sit amet, viverra vel nisi",
-          }}
-        />
-
-        <Dropdown
-          title="4. Seguimiento de Documentos"
-          content={{
-            subtitle: "Estado del Documento",
             text: (
               <div>
-                <p>
-                  Podés ver si el documento está en borrador, enviado,
-                  confirmado o desaprobado. Gestión: Podés visualizar, compartir
-                  y descargar los documentos desde la sección de seguimiento.
-                </p>
                 <ul className="list-disc pl-6 text-gray-600">
                   <li>
                     <strong>a) Presupuesto</strong>
@@ -93,6 +80,13 @@ export const HelpPage = () => {
                 </ul>
               </div>
             ),
+          }}
+        />
+        <Dropdown
+          title="4. Seguimiento de Documentos"
+          content={{
+            subtitle: "Estado del Documento",
+            text: "Podés ver si el documento está en borrador, enviado, confirmado o desaprobado Gestión: Podés visualizar, compartir y descargar los documentos desde la sección de seguimiento.",
           }}
         />
       </div>

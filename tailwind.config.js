@@ -18,6 +18,9 @@ export default {
         "gradient-yellow-inverted":
           "linear-gradient(180deg, rgba(255,237,0,1) 0%, rgba(255,161,0,1) 100%)",
       },
+      fontFamily: {
+        lato: ["Lato", "sans-serif"],
+      },
     },
   },
   plugins: [],

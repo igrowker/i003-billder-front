@@ -41,14 +41,10 @@ export const InputText = ({
   const handleBlur = () => {
     setIsFocused(false);
   };
-  // useEffect(() => {
-  //   if (emailRef.current) {
-  //     emailRef.current.focus();
-  //   }
-  // }, []);
 
 
-  const normalStyle = `${isFocused ? "border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
+
+  const normalStyle = `${isFocused ? " border-[3px] border-customOrange" : ""} disabled:bg-slate-200 `;
   const outlinedBlackStyle = "focus:ring-2 focus:ring-orange/600";
 
   const finalStyle =
@@ -75,7 +71,7 @@ export const InputText = ({
             paddingInline: isFocused ? "8px" : 0,
             backgroundColor: isFocused ? "white" : "",
           }}
-          className={` z-10 transition-all ease-in-out duration-100 pointer-events-none absolute text-gray-500 top-1/2  left-2 -translate-y-1/2`}
+          className={`z-10  font-medium  transition-all ease-in-out duration-100  pointer-events-none absolute text-gray-500 top-1/2  left-2 -translate-y-1/2`}
         >
           {labelText}
         </span>

@@ -8,8 +8,8 @@ import { ReturnLayout } from "@/layouts/ReturnLayout";
 import { useClientStore } from "@/store/clientStore";
 import { useProjectStore } from "@/store/projectStore";
 import { ReusableButton } from "@/ui/components";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface Item {
   nombre: string;
@@ -24,7 +24,6 @@ enum CreateBudgetTabs {
 }
 
 export const CreateBudgetPage = () => {
-  const navigate = useNavigate();
   const { projectId } = useParams();
 
   const [tab, setTab] = useState(CreateBudgetTabs.Initial);
@@ -35,6 +34,15 @@ export const CreateBudgetPage = () => {
 
   const getClientById = useClientStore(state => state.getClientById);
   const getProjectById = useProjectStore(state => state.getProjectById);
+  
+  const locationReact = useLocation();
+  const navigateReact = useNavigate();
+  
+    const goLast = () => {
+      const urls = locationReact.pathname.split('/').filter(state => state !== '');
+      navigateReact('/' + urls.slice(0, urls.length - 1).join('/'))
+      
+    }
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -81,7 +89,7 @@ export const CreateBudgetPage = () => {
 
   const handleGoBack = () => {
     if (tab === CreateBudgetTabs.Initial) {
-      navigate(-1);
+      goLast();
       return;
     }
 
@@ -94,7 +102,7 @@ export const CreateBudgetPage = () => {
 
   return (
     <ReturnLayout
-      returnFunction={() => handleGoBack()}
+      returnFunction={handleGoBack}
       title="Crear presupuesto"
     >
       <div>
